@@ -38,12 +38,12 @@ We welcome contributions from the community to help improve the Icy Tower Game. 
 1. Fork the repository.
 
 2. Create a new branch for your feature or bug fix:
-   3. Make your changes and ensure they are working properly.
+3. Make your changes and ensure they are working properly.
 
 4. Commit your changes:
    
 5. Push your changes to your forked repository:
-   6. Open a pull request on the main repository, describing your changes and explaining why they are valuable.
+6. Open a pull request on the main repository, describing your changes and explaining why they are valuable.
 
 Please ensure that your contributions adhere to our [Code of Conduct](CODE_OF_CONDUCT.md).
 
