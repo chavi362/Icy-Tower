@@ -1,0 +1,257 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0%;
+    background-image: url("../image/background-for-game.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    font-family: 'Pacifico', cursive;
+}
+
+form {
+    text-align: center;
+}
+
+.main-heading {
+    text-align: center;
+    font-size: 8.5em;
+    margin-top: 0%;
+    margin-right: 20%;
+    background-image: linear-gradient(magenta, magenta, #31a2ff, rgb(138, 12, 65));
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+}
+
+@media screen and (max-width:1200px) {
+    .main-heading {
+        font-size: 6em;
+    }
+}
+
+@media screen and (max-width:1000px) {
+    .main-heading {
+        margin-right: auto;
+    }
+}
+
+@media screen and (max-width:700px) {
+    .main-heading {
+        font-size: 4em;
+    }
+}
+
+.hide {
+    display: none;
+}
+
+
+#login {
+    float: right;
+    margin-right: 4%;
+    margin-top: 2%;
+}
+
+#sign-in {
+    margin-bottom: 2%;
+}
+
+.container {
+    margin: 10%;
+    margin-top: 0%;
+    position: relative;
+}
+
+.form {
+    width: 27%;
+    background-color: white;
+    color: black;
+    border: 3px solid #31a2ff;
+    margin-top: -7%;
+    margin-left: 37%;
+    z-index: 99;
+    align-self: center;
+    z-index: 99;
+    position: fixed;
+}
+
+@media screen and (max-width:1200px) {
+    .form {
+        width: 47%;
+        margin-left: 25%;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .form {
+        width: 96%;
+        margin-left: 2%;
+    }
+}
+
+.form input {
+    width: 96%;
+    padding: 3%;
+    margin: 0.5% 1% 0px 1%;
+    border: none;
+    background: #bfb8b8;
+}
+
+.form label {
+    font-size: 1.5em;
+}
+
+.submit {
+    width: 96%;
+    border: none;
+    margin: 0.5% 1% 0px 1%;
+    padding: 3.5%;
+    background: linear-gradient(magenta, #31a2ff, rgb(138, 12, 65));
+    color: white;
+    font-size: 1.8em;
+}
+
+.form input :focus {
+    background-color: #625b5b;
+    outline: none;
+}
+
+.form h2 {
+    font-size: 1.6em;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+}
+
+.message {
+    color: red;
+}
+
+.error-img {
+    width: 16px;
+    height: 16px;
+}
+
+#error-massage {
+    float: left;
+    color: red;
+    text-align: left;
+    margin: 0;
+}
+
+.image {
+    flex: 50%;
+    max-width: 50%;
+    padding: 0 4px;
+}
+
+@media screen and (max-width:700px) {
+    .image {
+        flex: 100%;
+        max-width: 100%;
+    }
+}
+
+.container img {
+    border-radius: 30px;
+    width: 450px;
+    height: 350px;
+}
+
+@media screen and (max-width: 1150px) {
+   .container  img {
+        width: 350px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .container img {
+        width: 280px;
+        height: 250px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .container img {
+        width: 450px;
+        height: 350px;
+    }
+}
+
+#open-form {
+    margin-top: 2%;
+    margin-left: 2%;
+    float: left;
+    min-width: 100px;
+    height: 50px;
+    border-radius: 30px;
+    border: 1px solid #ccc;
+    color: #315bff;
+    outline: none;
+    font-size: 20px;
+    background: white;
+    font-family: 'Pacifico', cursive;
+}
+
+#hello-user {
+    margin-top: 2%;
+    margin-left: 2%;
+    float: left;
+    min-width: 100px;
+    height: 82px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    color: #315bff;
+    outline: none;
+    font-size: 20px;
+    background: white;
+}
+
+.change-form {
+    color: #315bff;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    height: 29px;
+    font-family: 'Pacifico', cursive;
+    font-size: 1.1em;
+}
+
+.btn-close {
+    border: none;
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    display: block;
+    width: 28px;
+    height: 28px;
+    background: url(../image/close-window.png) no-repeat;
+    font-family: 'Pacifico', cursive;
+}
+#close-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+#you-must-login{
+    display: none;
+    font-size: 1.7em;
+    background-image: url("../image/background-for-game.png");
+    position: fixed;
+    width: 25%;
+    margin-top: 15%;
+    z-index: 99;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 40px;
+    margin-right: 42.5%;
+    margin-left: 42.5%;
+}

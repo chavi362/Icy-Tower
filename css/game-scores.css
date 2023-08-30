@@ -1,0 +1,73 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url("../image/background-for-game.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 5%;
+}
+
+.flex-part {
+    width: 48%;
+}
+
+.flex-part img {
+    width: 94%;
+    height: 30%;
+    margin-left: 3%;
+    margin-top: -7%;
+}
+
+@media (max-width: 950px) {
+    .flex-part {
+        position: static;
+        width: 100%;
+        height: auto;
+    }
+}
+
+.back {
+    display: inline-block;
+    float: right;
+    opacity: 0.5;
+}
+
+.home {
+    width: 4%;
+    margin-top: 1%;
+    height:10%;
+    float: right;
+    opacity: .5;
+}
+
+.logo {
+    display: inline-block;
+    margin-left: 20%;
+    width: 50%;
+    height: 40%;
+    margin-top: -5%;
+}
+
+
+p {
+    font: outline;
+    font-size: 30;
+    font: bold;
+    color: rgb(204, 137, 13);
+    margin-left: 10%;
+    margin-top: -.3%;
+    font-family: 'Pacifico', cursive;
+}
+@media (max-width: 750px) {
+    p {
+        font-size: 25;
+    }
+}

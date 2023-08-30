@@ -1,0 +1,14 @@
+#hello-user {
+    margin-top: 2%;
+    margin-left: 2%;
+    float: left;
+    min-width: 100px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    color: #315bff;
+    outline: none;
+    font-size: 20px;
+    background: white;
+    font-family: 'Pacifico', cursive;
+    text-align: center;
+}

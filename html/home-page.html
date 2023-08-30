@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        href="https://fonts.googleapis.com/css?family=Cabin|Inconsolata|Nunito|Nunito+Sans|Pacifico|Quicksand|Rubik|VT323"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/home-page.css">
+
+    <title>home-page</title>
+</head>
+
+<body>
+    <header>
+        <div class="hide" id="hello-user">
+            <span id="user-first-name"></span><br>
+            <span id="user-name"> </span>
+        </div>
+        <button id="open-form">Login to your account</button>
+        <h1 class="main-heading">our games</h1>
+    </header>
+    <div class="form hide" id="sign-in-form">
+        <button class="btn-close" type="button"></button>
+        <br>
+        <button class="change-form" id="change-to-login" type="button">already have an acount? click to login</button>
+        <form method="get">
+            <div> <label for="first-name">first name</label>
+                <input type="text" id="first-name" name="first-name">
+            </div><br>
+            <br>
+            <div> <label for="email">email</label>
+                <input  name="email-user-name" type="email" id="user-name" placeholder="this w'll be your user name">
+            </div><br>
+            <br>
+            <div> <label for="pwd">Password</label>
+                <br>
+                <input type="password" id="pasword-first" name="pwd">
+                <span id="message" class="message"></span>
+            </div> <br>
+            <br>
+            <div><label for="verify password">verify Password</label>
+                <input id="verify-pwd" name="verify password">
+                <span class="hide" id="verify-message">**Enter the password here again</span>
+            </div> <br>
+            <br> <button class="submit" id="sign-in-submit">sign-in</button>
+            <br>
+            <span class="message" id="submit-error-message"></span>
+    </div>
+
+    <div class="form hide" id="login-form">
+        <button class="btn-close" type="button"></button>
+        <br>
+        <button class="change-form" id="change-to-sign" type="button">don't have an account? sign in</button>
+        <h2>we are happy to see you again!</h2>
+        <form>
+            <div> <label for="user">user name</label>
+                <input type="email" id="email" name="user" required="required">
+            </div><br>
+            <br>
+            <div> <label for="pwd">Password</label>
+                <br>
+                <input type="password" id="pwd" name="pwd" required="required">
+            </div> <br>
+            <br>
+            <div class="hide" id="error-massage">** The
+                identification process
+                failed ,one or more of the details is incorrect<br></span>
+            </div>
+            <div> <button class="submit" id="login-submit" type="submit">login</button></div>
+    </div>
+    <div id="you-must-login">
+        <button id="close-modal">
+            <img src="../image/x.png" alt="x">
+        </button>
+       <span><strong>please login to continue</strong><br>You can't play without being logged into your account</span> 
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="image">
+                <a href="../html/icy-tower-home.html" class="game"><img src="../image/icy-tower-start.png"></a>
+            </div>
+        </div>
+     
+    <script src="../js/login-sign-in.js"></script>
+    <script src="../js/home-page.js"></script>
+</body>
+
+</html>
