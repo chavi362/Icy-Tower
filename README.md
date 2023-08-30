@@ -9,7 +9,13 @@ An interactive Icy Tower Game built with JavaScript, HTML, and CSS. Let's come t
 
 3. Register for the game, enter your name and valid email and password, and proceed.
 
-4. Choose a character and difficulty level to start playing.
+4. Choose new game
+5. choose your favorite charcter
+
+![image](https://github.com/chavi362/Icy-Tower/assets/140444217/c4ab67b1-5c19-4170-8207-7c3fde2ed459)
+6. choose your level. The level influences the speed the towl blocks are mooving
+![image](https://github.com/chavi362/Icy-Tower/assets/140444217/4aff9fcb-c4d9-4333-b2b8-61c5e80ec51f)
+7. start playing!!!
 This is the instructions for the game, you can find them also in the project itself
 ![image](https://github.com/chavi362/Icy-Tower/assets/140444217/6fa4d7b2-672a-492a-980a-0298c6cf39c4)
 
