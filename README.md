@@ -10,7 +10,7 @@ An interactive Icy Tower Game built with JavaScript, HTML, and CSS. Let's come t
 3. Register for the game, enter your details, and proceed.
 
 4. Choose a character and difficulty level to start playing.
-
+## If you find this project useful or interesting, please consider giving it a star ⭐️. Your support is highly appreciated!
 ## Contributing
 
 We welcome contributions from the community to help improve the Icy Tower Game. If you would like to contribute, please follow these steps:
