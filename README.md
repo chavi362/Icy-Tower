@@ -27,12 +27,21 @@ The level influences the speed the towl blocks are mooving and the distance betw
 ## Project Structure
 
 The Icy Tower Game project is structured as follows:
-
-- `images/`: Contains all the images for the project.
-- `js/`: Contains the JavaScript files that power the game logic.
-- `css/`: Contains the CSS files for styling the game interface.
-- `html/`: Contains the HTML files for the game.
-- `tower.html`: The HTML file for the actual game interface.
+```graphql
+./Icy-Tower/*
+  ├─ css/     - # Contains the CSS files for styling the game interface.
+  |
+  ├─ html/    - # Contains the HTML files for the game.
+  |  └─ tower.html - # The actual game interface
+  |
+  ├─ images/  - # Contains all the images for the project.
+  |
+  ├─ js/      - # Contains the JavaScript files that power the game logic.
+  |
+  ├─ CODE_OF_CONDUCT.md 
+  ├─ LICENSE     
+  └─ README.md   
+```
 - Note: every html file has css file and js file with its name, they power it and style it, the html files have links for theirs 
 ## Contributing
 
