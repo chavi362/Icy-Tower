@@ -1,82 +1,81 @@
 body {
-    background-image: url("../image/background-for-game.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    font-family: 'Pacifico', cursive;
-    text-align: center;
+  background-image: url('../image/background-for-game.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: 'Pacifico', cursive;
+  text-align: center;
 }
 
 .home {
-    width: 4%;
-    margin-left: 95%;
-    opacity: .5;
-    margin-top: 1%;
-
+  width: 4%;
+  margin-left: 95%;
+  opacity: 0.5;
+  margin-top: 1%;
 }
 
 .back {
-    margin-top: 1%;
-    width: 5%;
-    display: inline-block;
-    float: right;
-    opacity: 0.5;
+  margin-top: 1%;
+  width: 5%;
+  display: inline-block;
+  float: right;
+  opacity: 0.5;
 }
 
 .all-levels {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
 }
 
 img {
-    margin-top: -5%;
-    grid-column: 1/2;
-    grid-row: 1/2;
-    margin-left: 40%;
-    width: 20%;
+  margin-top: -5%;
+  grid-column: 1/2;
+  grid-row: 1/2;
+  margin-left: 40%;
+  width: 20%;
 }
 
 h1 {
-    grid-column: 1/2;
-    font-size: 100px;
-    text-shadow: 2px 2px rgb(204, 137, 13);
-    margin-top: -5%;
+  grid-column: 1/2;
+  font-size: 100px;
+  text-shadow: 2px 2px rgb(204, 137, 13);
+  margin-top: -5%;
 }
 
 #level-one {
-    grid-column: 1/2;
-    margin-top: -4%;
+  grid-column: 1/2;
+  margin-top: -4%;
 }
 
 .levels {
-    margin-top: 2%;
-    margin-left: 30%;
-    margin-right: 30%;
-    height: 50px;
-    border-radius: 30px;
-    border: 1px solid black;
-    color: rgb(204, 137, 13);
-    font-family: 'Pacifico', cursive;
-    font-size: 20px;
-    background-color: white;
-    text-decoration: none;
+  margin-top: 2%;
+  margin-left: 30%;
+  margin-right: 30%;
+  height: 50px;
+  border-radius: 30px;
+  border: 1px solid black;
+  color: rgb(204, 137, 13);
+  font-family: 'Pacifico', cursive;
+  font-size: 20px;
+  background-color: white;
+  text-decoration: none;
 }
 
-@media screen and (max-width:1118px) {
-    h1 {
-        font-size: 70px;
-    }
+@media screen and (max-width: 1118px) {
+  h1 {
+    font-size: 70px;
+  }
 }
 
-@media screen and (max-width:860px) {
-    h1 {
-        font-size: 50px;
-    }
+@media screen and (max-width: 860px) {
+  h1 {
+    font-size: 50px;
+  }
 }
 
-@media screen and (max-width:632px) {
-    img {
-        width: 30%;
-        margin-left: 35%;
-    }
+@media screen and (max-width: 632px) {
+  img {
+    width: 30%;
+    margin-left: 35%;
+  }
 }
