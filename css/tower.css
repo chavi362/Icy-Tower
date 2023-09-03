@@ -1,89 +1,86 @@
 body {
-    padding: 0px;
-    margin: 0px;
-    border: 0px;
-    font-family: 'Pacifico', cursive;
-    background-image: url("../image/background-for-game.png");
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+  font-family: 'Pacifico', cursive;
+  background-image: url('../image/background-for-game.png');
 }
 
 #myCanvas {
-    width: 60%;
-    max-height: 100%;
-    padding: 0;
-    display: block;
-    position: absolute;
-    height: 99.4%;
-    top: 0;
-    bottom: 0;
-    right: 19%;
-    border: 2px solid black;
-    background-image: url('../image/stone-wall.jpg');
-    background-repeat: repeat;
-    background-size: cover;
-    background-position: center;
-
+  width: 60%;
+  max-height: 100%;
+  padding: 0;
+  display: block;
+  position: absolute;
+  height: 99.4%;
+  top: 0;
+  bottom: 0;
+  right: 19%;
+  border: 2px solid black;
+  background-image: url('../image/stone-wall.jpg');
+  background-repeat: repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 .game-score {
-    /* display: inline-block; */
-    margin-top: 40%;
-    margin-right: 10px;
-    width: 24%;
+  /* display: inline-block; */
+  margin-top: 40%;
+  margin-right: 10px;
+  width: 24%;
 }
 
 .game-score span {
-    font-size: 6em;
-    line-height: 0.6;
-    text-align: center;
-    /* letter-spacing: -5px; */
+  font-size: 6em;
+  line-height: 0.6;
+  text-align: center;
+  /* letter-spacing: -5px; */
 }
 
 .game-score h1 {
-    font-size: 3em;
-    line-height: 0.1;
+  font-size: 3em;
+  line-height: 0.1;
 }
 
 .back {
-    margin-top: -10%;
-    width: 5%;
-    display: inline-block;
-    float: right;
-    opacity: 0.5;
+  margin-top: -10%;
+  width: 5%;
+  display: inline-block;
+  float: right;
+  opacity: 0.5;
 }
 
-
-
 .link {
-    min-width: 100px;
-    height: 50px;
-    border-radius: 30px;
-    border: 1px solid #ccc;
-    color: #315bff;
-    outline: none;
-    font-size: 20px;
-    text-decoration: none;
-    background-color: white;
+  min-width: 100px;
+  height: 50px;
+  border-radius: 30px;
+  border: 1px solid #ccc;
+  color: #315bff;
+  outline: none;
+  font-size: 20px;
+  text-decoration: none;
+  background-color: white;
 }
 
 .link:hover {
-    box-shadow: 0 0 13px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 13px 3px rgba(0, 0, 0, 0.5);
 }
 
 .closeModal {
-    color: #aaa;
-    float: right;
-    font-weight: bold;
+  color: #aaa;
+  float: right;
+  font-weight: bold;
 }
 
 .overModal {
-    display: none;
-    background-image: url("../image/background-for-game.png");
-    position: fixed;
-    width: 25%;
-    margin-top: 15%;
-    padding: 20px;
-    border: 1px solid #888;
-    border-radius: 40px;
-    margin-right: 42.5%;
-    margin-left: 42.5%;
+  display: none;
+  background-image: url('../image/background-for-game.png');
+  position: fixed;
+  width: 25%;
+  margin-top: 15%;
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 40px;
+  margin-right: 42.5%;
+  margin-left: 42.5%;
 }

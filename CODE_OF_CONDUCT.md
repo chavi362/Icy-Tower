@@ -32,4 +32,3 @@ If you experience or witness any behavior that violates this Code of Conduct, pl
 ## Enforcement
 
 Violations of this Code of Conduct may result in temporary or permanent restrictions on participation in the project. Project maintainers have the right and responsibility to remove, edit, or reject any contributions or comments that violate this Code of Conduct.
-

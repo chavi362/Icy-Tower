@@ -1,42 +1,40 @@
 body {
-    background-image: url("../image/background-for-game.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    font-family: 'Pacifico', cursive;
+  background-image: url('../image/background-for-game.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: 'Pacifico', cursive;
 }
 
 .logo {
-    margin-top: -7%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-    height: 40%;
+  margin-top: -7%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  height: 40%;
 }
 
 .options {
-    margin-left: 6%;
-
+  margin-left: 6%;
 }
 
 .options a {
-    font: outline;
-    font-size: 500%;
-    font: bold;
-    color: rgb(204, 137, 13);
-    margin-left: 10%;
-    margin-top: -.3%;
-    font-family: 'Pacifico', cursive;
-    text-decoration: none;
+  font: outline;
+  font-size: 500%;
+  font: bold;
+  color: rgb(204, 137, 13);
+  margin-left: 10%;
+  margin-top: -0.3%;
+  font-family: 'Pacifico', cursive;
+  text-decoration: none;
 }
 
 .options a:hover {
-    color: rgb(158, 107, 11);
+  color: rgb(158, 107, 11);
 }
 
 .home {
-    width: 4%;
-    float: right;
-    opacity: .5;
+  width: 4%;
+  float: right;
+  opacity: 0.5;
 }
-

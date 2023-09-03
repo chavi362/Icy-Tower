@@ -1,0 +1,12 @@
+{
+  "name": "icy-tower",
+  "version": "1.0.0",
+  "description": "An interactive Icy Tower Game built with JavaScript, HTML, and CSS. Let's come together to contribute or play!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
