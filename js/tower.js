@@ -1,3 +1,21 @@
+// initial audio
+const backgroundMusic = new Audio('../audio/happy-day-113985.mp3')
+const successSound = new Audio('../audio/game-bonus-144751.mp3')
+const failure = new Audio('../audio/wah-wah-sad-trombone-6347.mp3')
+// ask to user agreement to music and sounds
+let playMusic = false
+let agreementModal = document.getElementById('agree-to-sound');
+agreementModal.style.display = 'block';
+let closeAgreementModal= document.getElementById('close-modal-agreement'); //add event listener to the x button in the closal model to close it
+closeAgreementModal.addEventListener('click', () => {
+  agreementModal.style.display = 'none';
+})
+let agreementBtn = document.getElementById('agreement');
+agreementBtn.addEventListener('click', ()=>{
+  playMusic = true;
+  agreementModal.style.display = 'none';
+})
+
 let minmumBlockWidth;
 let horizontalDistance;
 let velocity;
@@ -94,7 +112,9 @@ function drawBlocks() {
       item.width,
       item.height
     );
+
   });
+
 }
 let times = 0;
 function movingScreen() {
@@ -379,6 +399,10 @@ letStart();
 let fondHighScore = false;
 function mainLoop() {
   //the loop that works while the game. It calls the functions
+  if (playMusic){
+    backgroundMusic.play();
+  }
+ 
   if (gameOver == false) {
     if (keyboard.any) {
       context.clearRect(0, 0, canvas.width, canvas.height);
@@ -405,16 +429,29 @@ function mainLoop() {
       if (character.onGround) updateScore();
       if (score > 25 && !step == 1) {
         step = 1;
+        if (playMusic){
+          successSound.play();
+        }
+    
         cancelAnimationFrame(mainLoop);
       }
       if (score > 50 && step != 2) {
         step = 2;
+        
+        if (playMusic){
+          successSound.play();
+        }
       }
       drawBlocks();
       drawCharacter();
     }
     myanim = requestAnimationFrame(mainLoop);
   } else {
+    if (playMusic){
+      backgroundMusic.pause();
+      failure.play();
+    }
+
     alphabet_index = 0;
     character.y += character.height / 2;
     context.clearRect(0, 0, canvas.width, canvas.height);
@@ -484,6 +521,7 @@ function gradientAnimation() {
     //when we finished introduct "game over" twice
     let overMOdal = document.getElementById('over-modal');
     overMOdal.style.display = 'block';
+  
   }
 }
 let closeDiv = document.getElementById('close-modal'); //add event listener to the x button in the closal model to close it
