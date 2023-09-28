@@ -32,6 +32,19 @@ form {
   -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
 }
+.icy-tower-wrap{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    margin: auto;
+    width: 100vw;
+    align-items: center;
+}
+.icy-tower-img{
+    width: 60vw;
+    margin-inline: 20vw;
+}
 
 @media screen and (max-width: 1200px) {
   .main-heading {
