@@ -24,8 +24,8 @@ body {
 }
 
 .game-score {
-  /* display: inline-block; */
-  margin-top: 40%;
+  position: fixed;
+  bottom: 0;
   margin-right: 10px;
   width: 24%;
 }
