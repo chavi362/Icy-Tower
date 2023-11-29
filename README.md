@@ -66,7 +66,6 @@ Thank you to:
   <img src="https://contrib.rocks/image?repo=chavi362/Icy-Tower" />
 </a>
 
-Made with [contrib.rocks](https://contrib.rocks).
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
