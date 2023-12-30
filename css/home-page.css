@@ -357,3 +357,109 @@ form {
       transform: translate(1px, -2px) rotate(0deg);
   }
 }
+:root {
+  --color-background: #31037d;
+  --axis-x: 1px;
+  --axis-y: 1rem;
+  --delay: 10;
+  --color-black: #000;
+  --color-white: #fff;
+  --color-orange: #d49c3d;
+  --color-red: #d14b3d;
+  --color-violet: #cf52eb;
+  --color-blue: #44a3f7;
+  --color-green: #5acb3c;
+  --color-yellow: #debf40;
+  --color-foreground: var(--color-white);
+  --font-name: Righteous;
+}
+.c-rainbow {
+  counter-reset: rainbow;
+  position: relative;
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  z-index: 5;
+  box-sizing: border-box;
+}
+.c-rainbow__layer {
+  --text-color: var(--color-foreground);
+  counter-increment: rainbow;
+  font-size: 3rem;
+  color: var(--text-color);
+  text-shadow: -1px -1px 0 var(--color-black), 1px -1px 0 var(--color-black), -1px 1px 0 var(--color-black), 1px 1px 0 var(--color-black), 4px 4px 0 rgba(0, 0, 0, .2);
+  animation: rainbow 1.5s ease-in-out infinite;
+  font-size: 150px;
+  /* margin: 15px; */
+  margin-left: 110px;
+  margin-top: 10px;
+}
+.c-rainbow__layer:nth-child(1) {
+  animation-delay: calc(1 / var(--delay) * 1s);
+  left: calc(var(--axis-x) * 1);
+  z-index: -10;
+}
+.c-rainbow__layer:nth-child(2) {
+  animation-delay: calc(2 / var(--delay) * 1s);
+  left: calc(var(--axis-x) * 2);
+  z-index: -20;
+}
+.c-rainbow__layer:nth-child(3) {
+  animation-delay: calc(3 / var(--delay) * 1s);
+  left: calc(var(--axis-x) * 3);
+  z-index: -30;
+}
+.c-rainbow__layer:nth-child(4) {
+  animation-delay: calc(4 / var(--delay) * 1s);
+  left: calc(var(--axis-x) * 4);
+  z-index: -40;
+}
+.c-rainbow__layer:nth-child(5) {
+  animation-delay: calc(5 / var(--delay) * 1s);
+  left: calc(var(--axis-x) * 5);
+  z-index: -50;
+}
+.c-rainbow__layer:nth-child(6) {
+  animation-delay: calc(6 / var(--delay) * 1s);
+  left: calc(var(--axis-x) * 6);
+  z-index: -60;
+}
+.c-rainbow__layer:nth-child(7) {
+  animation-delay: calc(7 / var(--delay) * 1s);
+  left: calc(var(--axis-x) * 7);
+  z-index: -70;
+}
+.c-rainbow__layer:not(:first-child) {
+  position: absolute;
+  top: 0;
+}
+.c-rainbow__layer--white {
+  --text-color: var(--color-white);
+}
+.c-rainbow__layer--orange {
+  --text-color: var(--color-orange);
+}
+.c-rainbow__layer--red {
+  --text-color: var(--color-red);
+}
+.c-rainbow__layer--violet {
+  --text-color: var(--color-violet);
+}
+.c-rainbow__layer--blue {
+  --text-color: var(--color-blue);
+}
+.c-rainbow__layer--green {
+  --text-color: var(--color-green);
+}
+.c-rainbow__layer--yellow {
+  --text-color: var(--color-yellow);
+}
+@keyframes rainbow {
+  0%, 100% {
+      transform: translatey(var(--axis-y));
+ }
+  50% {
+      transform: translatey(calc(var(--axis-y) * -1));
+ }
+}
