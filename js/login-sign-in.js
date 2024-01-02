@@ -37,7 +37,7 @@ function cheakLoginValidation(e) {
   let massege = document.querySelector('#error-massage');
   let password = document.querySelector('#pwd').value;
   let userName = document.querySelector('#email').value;
-  console.log(userName);
+  console.log(userName);   // Is this a debugging statement?
   let user = JSON.parse(localStorage.getItem(userName));
   if (user == null || user.password != password) {
     massege.classList.remove('hide');
