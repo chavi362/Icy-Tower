@@ -56,7 +56,7 @@ function cheakLoginValidation(e) {
   updateHeloUser();
 }
 let verifyPwd = document.querySelector('#verify-pwd');
-verifyPwd.addEventListener('change', cheakEqualtoPwd);
+verifyPwd.addEventListener('input', cheakEqualtoPwd);
 function cheakEqualtoPwd() {
   let pw = document.querySelector('#pasword-first').value;
   if (pw != document.querySelector('#verify-pwd').value) {
@@ -73,9 +73,9 @@ function addMEssageAboutPassword(message) {
   document.getElementById('message').style.color = 'red';
 }
 let password = document.querySelector('#pasword-first');
-password.addEventListener('change', cheakPassword);
-password.addEventListener('change', cheakEqualtoPwd);
-function cheakPassword() {
+password.addEventListener('input', cheakPassword);   
+password.addEventListener('input', cheakEqualtoPwd);
+function cheakPassword() {   // Spelled wrong but not a concern
   let pw = document.querySelector('#pasword-first').value;
   if (pw.length < 8) {
     addMEssageAboutPassword('**Password length must be at least 8 characters');
