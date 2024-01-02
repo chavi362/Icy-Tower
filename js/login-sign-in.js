@@ -112,7 +112,7 @@ function saveUser(e) {
   var inputName = document.getElementsByName('email-user-name')[0];
   let userName = inputName.value;
   console.log(userName);
-  if (pwd === '' || firstName === '' || userName === '') {
+  if (pwd === '' || firstName === '' || userName === '') {   // Checks like this are unnecesary when you can use say 'required' in its html
     document.getElementById('submit-error-message').innerHTML =
       '**All the field are neccessary';
     isOk = false;
