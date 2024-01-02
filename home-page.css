@@ -1,0 +1,473 @@
+* {
+  box-sizing: border-box;
+}
+
+/* Added this so the scrollbar doesn't appear, messing the width of icons */
+html {
+  overflow-y: hidden;
+}
+
+body {
+  margin: 0%;
+  background-image: url('../image/background-for-game.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
+  font-family: 'Pacifico', cursive;
+}
+
+form {
+  text-align: center;
+}
+
+.main-heading {
+  text-align: center;
+  font-size: 8.5em;
+  margin-top: 0%;
+  margin-right: 20%;
+  background-image: linear-gradient(
+    magenta,
+    magenta,
+    #31a2ff,
+    rgb(138, 12, 65)
+  );
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+.icy-tower-wrap{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    margin: auto;
+    width: 100vw;
+    align-items: center;
+}
+.icy-tower-img{
+    width: 60vw;
+    margin-inline: 20vw;
+}
+
+@media screen and (max-width: 1200px) {
+  .main-heading {
+    font-size: 6em;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .main-heading {
+    margin-right: auto;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .main-heading {
+    font-size: 4em;
+  }
+}
+
+.hide {
+  display: none;
+}
+
+#login {
+  float: right;
+  margin-right: 4%;
+  margin-top: 2%;
+}
+
+#sign-in {
+  margin-bottom: 2%;
+}
+
+/* Changed margin so logo is at the center */
+.container {
+  margin: 35%;
+  margin-top: 0%;
+  position: relative;
+}
+
+.form {
+  width: 27%;
+  background-color: white;
+  color: black;
+  border: 3px solid #31a2ff;
+  margin-top: -7%;
+  margin-left: 37%;
+  z-index: 99;
+  align-self: center;
+  z-index: 99;
+  position: fixed;
+}
+
+@media screen and (max-width: 1200px) {
+  .form {
+    width: 47%;
+    margin-left: 25%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .form {
+    width: 96%;
+    margin-left: 2%;
+  }
+}
+
+.form input {
+  width: 96%;
+  padding: 3%;
+  margin: 0.5% 1% 0px 1%;
+  border: none;
+  background: #bfb8b8;
+}
+
+.form label {
+  font-size: 1.5em;
+}
+
+.submit {
+  width: 96%;
+  border: none;
+  margin: 0.5% 1% 0px 1%;
+  padding: 3.5%;
+  background: linear-gradient(magenta, #31a2ff, rgb(138, 12, 65));
+  color: white;
+  font-size: 1.8em;
+}
+
+.form input :focus {
+  background-color: #625b5b;
+  outline: none;
+}
+
+.form h2 {
+  font-size: 1.6em;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+.message {
+  color: red;
+}
+
+.error-img {
+  width: 16px;
+  height: 16px;
+}
+
+#error-massage {
+  float: left;
+  color: red;
+  text-align: left;
+  margin: 0;
+}
+
+.image {
+  flex: 50%;
+  max-width: 50%;
+  padding: 0 4px;
+}
+
+@media screen and (max-width: 700px) {
+  .image {
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+
+.container img {
+  border-radius: 30px;
+  width: 450px;
+  height: 350px;
+}
+
+@media screen and (max-width: 1150px) {
+  .container img {
+    width: 350px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .container img {
+    width: 280px;
+    height: 250px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .container img {
+    width: 450px;
+    height: 350px;
+  }
+}
+
+#open-form {
+  margin-top: 2%;
+  margin-left: 2%;
+  float: left;
+  min-width: 100px;
+  height: 50px;
+  border-radius: 30px;
+  border: 1px solid #ccc;
+  color: #315bff;
+  outline: none;
+  font-size: 20px;
+  background: white;
+  font-family: 'Pacifico', cursive;
+}
+#open-form:hover{
+  transform: scale(1.1);
+}
+
+#hello-user {
+  margin-top: 2%;
+  margin-left: 2%;
+  float: left;
+  min-width: 100px;
+  height: 82px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  color: #315bff;
+  outline: none;
+  font-size: 20px;
+  background: white;
+}
+
+.change-form {
+  color: #315bff;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  height: 29px;
+  font-family: 'Pacifico', cursive;
+  font-size: 1.1em;
+}
+
+.btn-close {
+  border: none;
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  display: block;
+  width: 28px;
+  height: 28px;
+  background: url(../image/close-window.png) no-repeat;
+  font-family: 'Pacifico', cursive;
+}
+#close-modal {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+#you-must-login {
+  display: none;
+  font-size: 1.7em;
+  background-image: url('../image/background-for-game.png');
+  position: fixed;
+  width: 25%;
+  margin-top: 15%;
+  z-index: 99;
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 40px;
+  margin-right: 42.5%;
+  margin-left: 42.5%;
+}
+
+.rainbow-text{
+  z-index: 50;
+	position: relative;
+	color: #000;
+	background: #fff;
+	mix-blend-mode: multiply;
+  overflow: hidden;
+  font-size: 8.5em;
+  /* text-shadow: 0 2px 4px rgba(0,0,0,0.5); */
+  padding: 2px 4px 6px;
+  margin: -2px -4px -6px;
+  font-weight: bold; /* Added to make the text bold */
+  opacity: 8000000; /* Adjust the opacity value as needed */
+}
+.rainbow-text::before{
+	content: "";
+	position: absolute;
+	top:0;right:0;bottom:0;left:-100%;
+	background: white repeating-linear-gradient(90deg, #14ffe9 0%, #ffc800 16.66666%, #ff00e0 33.33333%, #14ffe9 50.0%);
+	mix-blend-mode: screen;
+	pointer-events: none;
+  animation: move 1s linear infinite;
+}
+
+@keyframes move{
+  0%{transform: translateX(0);}
+  100%{transform: translateX(50%);}
+}
+
+@supports not (mix-blend-mode: multiply) {
+	.rainbow-text{
+	-webkit-text-fill-color: transparent;
+	background-clip: text !important;
+	background: white repeating-linear-gradient(90deg, #14ffe9, #ffc800, #ff00e0, #14ffe9);
+    text-shadow: none;
+	}
+	.rainbow-text::before{ content: none; }
+}
+
+.icy-img:hover{
+  
+    animation: shake 0.5s infinite;
+    animation-timing-function: ease-in-out;
+}
+
+
+@keyframes shake {
+  0% {
+      transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+      transform: translate(2px, -2px) rotate(-1deg);
+  }
+  20% {
+      transform: translate(3px, 0px) rotate(1deg);
+  }
+  30% {
+      transform: translate(-4px, 2px) rotate(0deg);
+  }
+  40% {
+      transform: translate(5px, -1px) rotate(1deg);
+  }
+  50% {
+      transform: translate(6px, 2px) rotate(-1deg);
+  }
+  60% {
+      transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+      transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+      transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+      transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+      transform: translate(1px, -2px) rotate(0deg);
+  }
+}
+:root {
+  --color-background: #31037d;
+  --axis-x: 1px;
+  --axis-y: 1rem;
+  --delay: 10;
+  --color-black: #000;
+  --color-white: #fff;
+  --color-orange: #d49c3d;
+  --color-red: #d14b3d;
+  --color-violet: #cf52eb;
+  --color-blue: #44a3f7;
+  --color-green: #5acb3c;
+  --color-yellow: #debf40;
+  --color-foreground: var(--color-white);
+  --font-name: Righteous;
+}
+.c-rainbow {
+  counter-reset: rainbow;
+  position: relative;
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  z-index: 5;
+  box-sizing: border-box;
+}
+
+/* Changed margins so the logo is centered */
+.c-rainbow__layer {
+  --text-color: var(--color-foreground);
+  counter-increment: rainbow;
+  font-size: 3rem;
+  color: var(--text-color);
+  text-shadow: -1px -1px 0 var(--color-black), 1px -1px 0 var(--color-black), -1px 1px 0 var(--color-black), 1px 1px 0 var(--color-black), 4px 4px 0 rgba(0, 0, 0, .2);
+  animation: rainbow 1.5s ease-in-out infinite;
+  font-size: 150px;
+  /* margin: 15px; */
+  margin-left: 400px;
+  margin-top: 10px;
+}
+.c-rainbow__layer:nth-child(1) {
+  animation-delay: calc(1 / var(--delay) * 1s);
+  left: calc(var(--axis-x) * 1);
+  z-index: -10;
+}
+.c-rainbow__layer:nth-child(2) {
+  animation-delay: calc(2 / var(--delay) * 1s);
+  left: calc(var(--axis-x) * 2);
+  z-index: -20;
+}
+.c-rainbow__layer:nth-child(3) {
+  animation-delay: calc(3 / var(--delay) * 1s);
+  left: calc(var(--axis-x) * 3);
+  z-index: -30;
+}
+.c-rainbow__layer:nth-child(4) {
+  animation-delay: calc(4 / var(--delay) * 1s);
+  left: calc(var(--axis-x) * 4);
+  z-index: -40;
+}
+.c-rainbow__layer:nth-child(5) {
+  animation-delay: calc(5 / var(--delay) * 1s);
+  left: calc(var(--axis-x) * 5);
+  z-index: -50;
+}
+.c-rainbow__layer:nth-child(6) {
+  animation-delay: calc(6 / var(--delay) * 1s);
+  left: calc(var(--axis-x) * 6);
+  z-index: -60;
+}
+.c-rainbow__layer:nth-child(7) {
+  animation-delay: calc(7 / var(--delay) * 1s);
+  left: calc(var(--axis-x) * 7);
+  z-index: -70;
+}
+.c-rainbow__layer:not(:first-child) {
+  position: absolute;
+  top: 0;
+}
+.c-rainbow__layer--white {
+  --text-color: var(--color-white);
+}
+.c-rainbow__layer--orange {
+  --text-color: var(--color-orange);
+}
+.c-rainbow__layer--red {
+  --text-color: var(--color-red);
+}
+.c-rainbow__layer--violet {
+  --text-color: var(--color-violet);
+}
+.c-rainbow__layer--blue {
+  --text-color: var(--color-blue);
+}
+.c-rainbow__layer--green {
+  --text-color: var(--color-green);
+}
+.c-rainbow__layer--yellow {
+  --text-color: var(--color-yellow);
+}
+@keyframes rainbow {
+  0%, 100% {
+      transform: translatey(var(--axis-y));
+ }
+  50% {
+      transform: translatey(calc(var(--axis-y) * -1));
+ }
+}
