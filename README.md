@@ -60,6 +60,7 @@ We welcome contributions from the community to help improve the Icy Tower Game. 
 Please ensure that your contributions adhere to our [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## Contributers
+
 Thank you to:
 
 <a href="https://github.com/chavi362/Icy-Tower/graphs/contributors">

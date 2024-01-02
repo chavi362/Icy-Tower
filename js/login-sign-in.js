@@ -37,7 +37,7 @@ function cheakLoginValidation(e) {
   let massege = document.querySelector('#error-massage');
   let password = document.querySelector('#pwd').value;
   let userName = document.querySelector('#email').value;
-  console.log(userName);   // Is this a debugging statement?
+  console.log(userName); // Is this a debugging statement?
   let user = JSON.parse(localStorage.getItem(userName));
   if (user == null || user.password != password) {
     massege.classList.remove('hide');
@@ -73,9 +73,10 @@ function addMEssageAboutPassword(message) {
   document.getElementById('message').style.color = 'red';
 }
 let password = document.querySelector('#pasword-first');
-password.addEventListener('input', cheakPassword);   
+password.addEventListener('input', cheakPassword);
 password.addEventListener('input', cheakEqualtoPwd);
-function cheakPassword() {   // Spelled wrong but not a concern
+function cheakPassword() {
+  // Spelled wrong but not a concern
   let pw = document.querySelector('#pasword-first').value;
   if (pw.length < 8) {
     addMEssageAboutPassword('**Password length must be at least 8 characters');
@@ -112,7 +113,8 @@ function saveUser(e) {
   var inputName = document.getElementsByName('email-user-name')[0];
   let userName = inputName.value;
   console.log(userName);
-  if (pwd === '' || firstName === '' || userName === '') {   // Checks like this are unnecesary when you can use say 'required' in its html
+  if (pwd === '' || firstName === '' || userName === '') {
+    // Checks like this are unnecesary when you can use say 'required' in its html
     document.getElementById('submit-error-message').innerHTML =
       '**All the field are neccessary';
     isOk = false;
