@@ -79,8 +79,8 @@ function cheakPassword() {
   let pw = document.querySelector('#pasword-first').value;
   if (pw.length < 8) {
     addMEssageAboutPassword('**Password length must be at least 8 characters');
-  } else if (pw.length > 15) {
-    addMEssageAboutPassword('**Password length must not exceed 15 characters');
+  } else if (pw.length > 35) {
+    addMEssageAboutPassword('**Password length must not exceed 35 characters');
   } else if (pw.search(/\d/) == -1) {
     addMEssageAboutPassword(
       '**Password length must contain at least one number'
