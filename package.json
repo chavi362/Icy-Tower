@@ -11,5 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "gsap": "^3.12.4"
+  },
+  "devDependencies": {
+    "prettier": "3.1.1"
   }
 }
