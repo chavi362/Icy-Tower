@@ -37,7 +37,7 @@ function cheakLoginValidation(e) {
   let massege = document.querySelector('#error-massage');
   let password = document.querySelector('#pwd').value;
   let userName = document.querySelector('#email').value;
-  console.log(userName);
+  console.log(userName); // Is this a debugging statement?
   let user = JSON.parse(localStorage.getItem(userName));
   if (user == null || user.password != password) {
     massege.classList.remove('hide');
@@ -56,7 +56,7 @@ function cheakLoginValidation(e) {
   updateHeloUser();
 }
 let verifyPwd = document.querySelector('#verify-pwd');
-verifyPwd.addEventListener('change', cheakEqualtoPwd);
+verifyPwd.addEventListener('input', cheakEqualtoPwd);
 function cheakEqualtoPwd() {
   let pw = document.querySelector('#pasword-first').value;
   if (pw != document.querySelector('#verify-pwd').value) {
@@ -73,14 +73,15 @@ function addMEssageAboutPassword(message) {
   document.getElementById('message').style.color = 'red';
 }
 let password = document.querySelector('#pasword-first');
-password.addEventListener('change', cheakPassword);
-password.addEventListener('change', cheakEqualtoPwd);
+password.addEventListener('input', cheakPassword);
+password.addEventListener('input', cheakEqualtoPwd);
 function cheakPassword() {
+  // Spelled wrong but not a concern
   let pw = document.querySelector('#pasword-first').value;
   if (pw.length < 8) {
     addMEssageAboutPassword('**Password length must be at least 8 characters');
-  } else if (pw.length > 15) {
-    addMEssageAboutPassword('**Password length must not exceed 15 characters');
+  } else if (pw.length > 35) {
+    addMEssageAboutPassword('**Password length must not exceed 35 characters');
   } else if (pw.search(/\d/) == -1) {
     addMEssageAboutPassword(
       '**Password length must contain at least one number'
@@ -113,6 +114,7 @@ function saveUser(e) {
   let userName = inputName.value;
   console.log(userName);
   if (pwd === '' || firstName === '' || userName === '') {
+    // Checks like this are unnecesary when you can use say 'required' in its html
     document.getElementById('submit-error-message').innerHTML =
       '**All the field are neccessary';
     isOk = false;
