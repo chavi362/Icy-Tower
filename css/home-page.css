@@ -2,6 +2,11 @@
   box-sizing: border-box;
 }
 
+/* Added this so the scrollbar doesn't appear, messing the width of icons */
+html {
+  overflow-y: hidden;
+}
+
 body {
   margin: 0%;
   background-image: url('../image/background-for-game.png');
@@ -9,6 +14,7 @@ body {
   background-size: cover;
   text-align: center;
   font-family: 'Pacifico', cursive;
+  /* top: 0%; */
 }
 
 form {
@@ -32,18 +38,45 @@ form {
   -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
 }
-.icy-tower-wrap {
+/* .icy-tower-wrap{
+    position: absolute; 
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: -1;
+    margin: auto;
+    width: 200vw; 
+    align-items: center; 
+ } */
+
+/* .icy-tower-img{
+    /* width: 60vw; 
+    margin: auto;
+    display: block;
+    width: auto;
+    max-height: 100vh;
+    
+ }  */
+
+ .icy-tower-wrap {
   position: absolute;
-  bottom: 0;
-  left: 0;
+  left: 50%;
+  top: 50%; /* Vertically center the container */
+  transform: translate(-50%, -50%); /* Adjust for vertical centering */
   z-index: -1;
-  margin: auto;
-  width: 100vw;
-  align-items: center;
+  width: 85vw; /* 80% of the viewport width */
+  height: 95vh; /* Fixed height, adjust as needed */
+  text-align: center;
+  overflow: hidden; /* Prevents the image from overflowing the container */
 }
+
 .icy-tower-img {
-  width: 60vw;
-  margin-inline: 20vw;
+  width: 100%; /* Allows the image to adjust its width while maintaining aspect ratio */
+  height: 100%; /* Ensures the image takes up the full height of the container */
+  object-fit: contain; /* Ensures the entire image is visible within the container without cropping */
+  display: block; /* To center with margin: auto; */
+  margin: auto;
 }
 
 @media screen and (max-width: 1200px) {
@@ -78,11 +111,31 @@ form {
   margin-bottom: 2%;
 }
 
+/* Changed margin so logo is at the center */
 .container {
-  margin: 10%;
-  margin-top: 0%;
-  position: relative;
+  position: absolute;
+  left: 50%;
+  top: 80%; /* Set the container 80% from the top */
+  transform: translateX(-50%); /* Adjust for horizontal and vertical centering */
+  z-index: -1;
+  width: 80%; /* Set the container width to 80% */
+  text-align: center;
+  overflow: hidden; /* Prevents the image from overflowing the container */
 }
+
+.container img {
+  width: 100%; /* Allows the image to adjust its width while maintaining aspect ratio */
+  height: auto; /* Ensures the image maintains its aspect ratio */
+  display: block; /* To center with margin: auto; */
+  margin: auto;
+
+  /* border-radius: 30px;
+  width: 450px;
+  height: 350px; */
+  
+}
+
+
 
 .form {
   width: 27%;
@@ -177,11 +230,7 @@ form {
   }
 }
 
-.container img {
-  border-radius: 30px;
-  width: 450px;
-  height: 350px;
-}
+
 
 @media screen and (max-width: 1150px) {
   .container img {
@@ -217,7 +266,7 @@ form {
   background: white;
   font-family: 'Pacifico', cursive;
 }
-#open-form:hover {
+#open-form:hover{
   transform: scale(1.1);
 }
 
@@ -276,12 +325,12 @@ form {
   margin-left: 42.5%;
 }
 
-.rainbow-text {
+.rainbow-text{
   z-index: 50;
-  position: relative;
-  color: #000;
-  background: #fff;
-  mix-blend-mode: multiply;
+	position: relative;
+	color: #000;
+	background: #fff;
+	mix-blend-mode: multiply;
   overflow: hidden;
   font-size: 8.5em;
   /* text-shadow: 0 2px 4px rgba(0,0,0,0.5); */
@@ -290,86 +339,71 @@ form {
   font-weight: bold; /* Added to make the text bold */
   opacity: 8000000; /* Adjust the opacity value as needed */
 }
-.rainbow-text::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: -100%;
-  background: white
-    repeating-linear-gradient(
-      90deg,
-      #14ffe9 0%,
-      #ffc800 16.66666%,
-      #ff00e0 33.33333%,
-      #14ffe9 50%
-    );
-  mix-blend-mode: screen;
-  pointer-events: none;
+.rainbow-text::before{
+	content: "";
+	position: absolute;
+	top:0;right:0;bottom:0;left:-100%;
+	background: white repeating-linear-gradient(90deg, #14ffe9 0%, #ffc800 16.66666%, #ff00e0 33.33333%, #14ffe9 50.0%);
+	mix-blend-mode: screen;
+	pointer-events: none;
   animation: move 1s linear infinite;
 }
 
-@keyframes move {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(50%);
-  }
+@keyframes move{
+  0%{transform: translateX(0);}
+  100%{transform: translateX(50%);}
 }
 
 @supports not (mix-blend-mode: multiply) {
-  .rainbow-text {
-    -webkit-text-fill-color: transparent;
-    background-clip: text !important;
-    background: white
-      repeating-linear-gradient(90deg, #14ffe9, #ffc800, #ff00e0, #14ffe9);
+	.rainbow-text{
+	-webkit-text-fill-color: transparent;
+	background-clip: text !important;
+	background: white repeating-linear-gradient(90deg, #14ffe9, #ffc800, #ff00e0, #14ffe9);
     text-shadow: none;
-  }
-  .rainbow-text::before {
-    content: none;
-  }
+	}
+	.rainbow-text::before{ content: none; }
 }
 
-.icy-img:hover {
-  animation: shake 0.5s infinite;
-  animation-timing-function: ease-in-out;
+.icy-img:hover{
+  
+    animation: shake 0.5s infinite;
+    animation-timing-function: ease-in-out;
 }
+
 
 @keyframes shake {
   0% {
-    transform: translate(1px, 1px) rotate(0deg);
+      transform: translate(1px, 1px) rotate(0deg);
   }
   10% {
-    transform: translate(2px, -2px) rotate(-1deg);
+      transform: translate(2px, -2px) rotate(-1deg);
   }
   20% {
-    transform: translate(3px, 0px) rotate(1deg);
+      transform: translate(3px, 0px) rotate(1deg);
   }
   30% {
-    transform: translate(-4px, 2px) rotate(0deg);
+      transform: translate(-4px, 2px) rotate(0deg);
   }
   40% {
-    transform: translate(5px, -1px) rotate(1deg);
+      transform: translate(5px, -1px) rotate(1deg);
   }
   50% {
-    transform: translate(6px, 2px) rotate(-1deg);
+      transform: translate(6px, 2px) rotate(-1deg);
   }
   60% {
-    transform: translate(-3px, 1px) rotate(0deg);
+      transform: translate(-3px, 1px) rotate(0deg);
   }
   70% {
-    transform: translate(3px, 1px) rotate(-1deg);
+      transform: translate(3px, 1px) rotate(-1deg);
   }
   80% {
-    transform: translate(-1px, -1px) rotate(1deg);
+      transform: translate(-1px, -1px) rotate(1deg);
   }
   90% {
-    transform: translate(1px, 2px) rotate(0deg);
+      transform: translate(1px, 2px) rotate(0deg);
   }
   100% {
-    transform: translate(1px, -2px) rotate(0deg);
+      transform: translate(1px, -2px) rotate(0deg);
   }
 }
 :root {
@@ -398,22 +432,21 @@ form {
   z-index: 5;
   box-sizing: border-box;
 }
+
+/* Changed margins so the logo is centered made them auto */
 .c-rainbow__layer {
   --text-color: var(--color-foreground);
   counter-increment: rainbow;
   font-size: 3rem;
   color: var(--text-color);
-  text-shadow:
-    -1px -1px 0 var(--color-black),
-    1px -1px 0 var(--color-black),
-    -1px 1px 0 var(--color-black),
-    1px 1px 0 var(--color-black),
-    4px 4px 0 rgba(0, 0, 0, 0.2);
+  text-shadow: -1px -1px 0 var(--color-black), 1px -1px 0 var(--color-black), -1px 1px 0 var(--color-black), 1px 1px 0 var(--color-black), 4px 4px 0 rgba(0, 0, 0, .2);
   animation: rainbow 1.5s ease-in-out infinite;
   font-size: 150px;
-  /* margin: 15px; */
-  margin-left: 110px;
-  margin-top: 10px;
+  margin: 10px auto; 
+  text-align: center;
+  
+  /* margin-left: 400px;
+  margin-top: 10px; */
 }
 .c-rainbow__layer:nth-child(1) {
   animation-delay: calc(1 / var(--delay) * 1s);
@@ -476,11 +509,10 @@ form {
   --text-color: var(--color-yellow);
 }
 @keyframes rainbow {
-  0%,
-  100% {
-    transform: translatey(var(--axis-y));
-  }
+  0%, 100% {
+      transform: translatey(var(--axis-y));
+ }
   50% {
-    transform: translatey(calc(var(--axis-y) * -1));
-  }
+      transform: translatey(calc(var(--axis-y) * -1));
+ }
 }

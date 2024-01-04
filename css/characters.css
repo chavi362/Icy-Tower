@@ -2,6 +2,12 @@
   box-sizing: border-box;
 }
 
+/* Added this so the scrollbar doesn't appear, messing the width of icons */
+html {
+  overflow-y: hidden;
+}
+
+
 body {
   margin: 0%;
   background-image: url('../image/background-for-game.png');
@@ -52,20 +58,20 @@ header {
   margin-top: 9%;
 }
 
+/* Changed the 3 hovers so when you hover over a characther
+the other characters don't change in size */
 #hero1:hover {
-  width: 15%;
-  opacity: 1;
+  transform: scale(1.2,1.2);  
 }
 
 #hero2:hover {
-  width: 15%;
-  opacity: 1;
+  transform: scale(1.2,1.2);  
 }
 
 #hero3:hover {
-  width: 12%;
-  opacity: 1;
+  transform: scale(1.2,1.2);  
 }
+
 
 @media only screen and (max-width: 1485px) {
   .logo {
