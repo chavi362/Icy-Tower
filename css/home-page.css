@@ -14,6 +14,7 @@ body {
   background-size: cover;
   text-align: center;
   font-family: 'Pacifico', cursive;
+  /* top: 0%; */
 }
 
 form {
@@ -37,18 +38,45 @@ form {
   -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
 }
-.icy-tower-wrap{
-    position: absolute;
-    bottom: 0;
-    left: 0;
+/* .icy-tower-wrap{
+    position: absolute; 
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
     z-index: -1;
     margin: auto;
-    width: 100vw;
-    align-items: center;
+    width: 200vw; 
+    align-items: center; 
+ } */
+
+/* .icy-tower-img{
+    /* width: 60vw; 
+    margin: auto;
+    display: block;
+    width: auto;
+    max-height: 100vh;
+    
+ }  */
+
+ .icy-tower-wrap {
+  position: absolute;
+  left: 50%;
+  top: 50%; /* Vertically center the container */
+  transform: translate(-50%, -50%); /* Adjust for vertical centering */
+  z-index: -1;
+  width: 85vw; /* 80% of the viewport width */
+  height: 95vh; /* Fixed height, adjust as needed */
+  text-align: center;
+  overflow: hidden; /* Prevents the image from overflowing the container */
 }
-.icy-tower-img{
-    width: 60vw;
-    margin-inline: 20vw;
+
+.icy-tower-img {
+  width: 100%; /* Allows the image to adjust its width while maintaining aspect ratio */
+  height: 100%; /* Ensures the image takes up the full height of the container */
+  object-fit: contain; /* Ensures the entire image is visible within the container without cropping */
+  display: block; /* To center with margin: auto; */
+  margin: auto;
 }
 
 @media screen and (max-width: 1200px) {
@@ -85,10 +113,29 @@ form {
 
 /* Changed margin so logo is at the center */
 .container {
-  margin: 35%;
-  margin-top: 0%;
-  position: relative;
+  position: absolute;
+  left: 50%;
+  top: 80%; /* Set the container 80% from the top */
+  transform: translateX(-50%); /* Adjust for horizontal and vertical centering */
+  z-index: -1;
+  width: 80%; /* Set the container width to 80% */
+  text-align: center;
+  overflow: hidden; /* Prevents the image from overflowing the container */
 }
+
+.container img {
+  width: 100%; /* Allows the image to adjust its width while maintaining aspect ratio */
+  height: auto; /* Ensures the image maintains its aspect ratio */
+  display: block; /* To center with margin: auto; */
+  margin: auto;
+
+  /* border-radius: 30px;
+  width: 450px;
+  height: 350px; */
+  
+}
+
+
 
 .form {
   width: 27%;
@@ -183,11 +230,7 @@ form {
   }
 }
 
-.container img {
-  border-radius: 30px;
-  width: 450px;
-  height: 350px;
-}
+
 
 @media screen and (max-width: 1150px) {
   .container img {
@@ -390,7 +433,7 @@ form {
   box-sizing: border-box;
 }
 
-/* Changed margins so the logo is centered */
+/* Changed margins so the logo is centered made them auto */
 .c-rainbow__layer {
   --text-color: var(--color-foreground);
   counter-increment: rainbow;
@@ -399,9 +442,11 @@ form {
   text-shadow: -1px -1px 0 var(--color-black), 1px -1px 0 var(--color-black), -1px 1px 0 var(--color-black), 1px 1px 0 var(--color-black), 4px 4px 0 rgba(0, 0, 0, .2);
   animation: rainbow 1.5s ease-in-out infinite;
   font-size: 150px;
-  /* margin: 15px; */
-  margin-left: 400px;
-  margin-top: 10px;
+  margin: 10px auto; 
+  text-align: center;
+  
+  /* margin-left: 400px;
+  margin-top: 10px; */
 }
 .c-rainbow__layer:nth-child(1) {
   animation-delay: calc(1 / var(--delay) * 1s);
