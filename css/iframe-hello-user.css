@@ -2,7 +2,8 @@
   margin-top: 2%;
   margin-left: 2%;
   float: left;
-  min-width: 100px;
+  min-width: 150px;
+  min-height: 40px;
   border-radius: 10px;
   border: 1px solid #ccc;
   color: #315bff;

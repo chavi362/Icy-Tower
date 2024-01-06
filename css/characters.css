@@ -1,6 +1,9 @@
 * {
   box-sizing: border-box;
 }
+.character-page{
+height: 100vh;
+}
 
 body {
   margin: 0%;
@@ -26,7 +29,7 @@ h1 {
 }
 
 .logo {
-  margin-top: -4%;
+  margin-top: -7%;
   margin-left: 40%;
   margin-right: 40%;
   width: 20%;
@@ -34,37 +37,42 @@ h1 {
 
 .character_photos {
   display: flex;
-  height: 80%;
+  height: 65%;
   width: 95%;
   justify-content: space-evenly;
+  align-items: center;
 }
 
 .hero {
   opacity: 0.5;
   margin-top: -2%;
+  height: 300px;
 }
 
 header {
-  margin-bottom: 4%;
+margin: 0;
 }
 
 .choose_your_hero {
-  margin-top: 9%;
+  margin: 0;
 }
 
 #hero1:hover {
-  width: 15%;
+  scale: 1.1;
   opacity: 1;
+  cursor: pointer;
 }
 
 #hero2:hover {
-  width: 15%;
+  scale: 1.1;
   opacity: 1;
+  cursor: pointer;
 }
 
 #hero3:hover {
-  width: 12%;
+  scale: 1.1;
   opacity: 1;
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 1485px) {
