@@ -1,37 +1,72 @@
 let btnOpen = document.querySelector('#open-form');
+const btnListClose = document.querySelectorAll('.btn-close');
+let verifyPwd = document.querySelector('#verify-pwd');
+let password = document.querySelector('#pasword-first');
+let submBtn = document.querySelector('#sign-in-submit');
+let allImg = document.querySelectorAll('a');
+let closeDiv = document.getElementById('close-modal');
+let isFormOpen = false;
+let cheakLogin = document.querySelector('#login-submit');
+const formList = document.querySelectorAll('div.form')
+const btnToggleForm = document.getElementsByClassName('js-toggle-form')
+
 if (sessionStorage.getItem('currentUser') != null) {
   updateHeloUser();
 }
-let isFormOpen = false;
+
+// EVENTS /////////////
+Object.keys(btnToggleForm).forEach((i)=>{
+  btnToggleForm[i].addEventListener('click', (e)=>{
+    formList.forEach((el)=>{
+      if(e.target.dataset.toggleTo === el.dataset.formType){
+        el.classList.remove('hide')
+      } else {
+        el.classList.add('hide')
+      }
+    })
+  })
+})
+
+btnListClose.forEach((item)=>{
+  item.addEventListener('click', ()=>{
+    location.reload();
+  });
+})
+
 btnOpen.addEventListener('click', () => {
   if (isFormOpen) return;
   isFormOpen = true;
   let form = document.querySelector('#login-form');
   if (window.screen.height < 600) form.style.position = 'absolute';
   form.classList.remove('hide');
-  let allImg = document.querySelectorAll('img');
-  allImg.forEach((img) => (img.style.opacity = 0.5));
+  toggleImageOpacity(false);
 });
-let btnClose = document.querySelectorAll('.btn-close');
-Array.prototype.forEach.call(btnClose, (item) => {
-  item.addEventListener('click', closeForm);
+
+closeDiv.addEventListener('click', () => {
+  let loginMEssage = document.getElementById('you-must-login');
+  loginMEssage.style.display = 'none';
 });
-function closeForm() {
-  location.reload();
-}
-let loginForm = document.querySelector('#change-to-sign');
-loginForm.addEventListener('click', changeSituation);
-let signForm = document.querySelector('#change-to-login');
-signForm.addEventListener('click', changeSituation);
-function changeSituation() {
-  let signForm = document.querySelector('#sign-in-form');
-  signForm.classList.toggle('hide');
-  let loginForm = document.querySelector('#login-form');
-  if (window.screen.height < 1000) signForm.style.position = 'absolute';
-  loginForm.classList.toggle('hide');
-}
-let cheakLogin = document.querySelector('#login-submit');
+
+allImg.forEach(function (item) {
+  item.addEventListener('click', addMessage);
+});
+
+submBtn.addEventListener('click', saveUser);
 cheakLogin.addEventListener('click', cheakLoginValidation);
+password.addEventListener('input', cheakPassword);
+password.addEventListener('input', cheakEqualtoPwd);
+verifyPwd.addEventListener('input', cheakEqualtoPwd);
+
+// FUNCTIONS /////////////
+function toggleImageOpacity(state){
+  const listAllImage = document.querySelectorAll('img');
+  if(state){
+    listAllImage.forEach((img) => (img.style.opacity = 1));
+  } else {
+    listAllImage.forEach((img) => (img.style.opacity = 0.5));
+  }
+}
+
 function cheakLoginValidation(e) {
   e.preventDefault();
   let massege = document.querySelector('#error-massage');
@@ -55,8 +90,7 @@ function cheakLoginValidation(e) {
   loginForm.classList.toggle('hide');
   updateHeloUser();
 }
-let verifyPwd = document.querySelector('#verify-pwd');
-verifyPwd.addEventListener('input', cheakEqualtoPwd);
+
 function cheakEqualtoPwd() {
   let pw = document.querySelector('#pasword-first').value;
   if (pw != document.querySelector('#verify-pwd').value) {
@@ -68,13 +102,12 @@ function cheakEqualtoPwd() {
     return true;
   }
 }
+
 function addMEssageAboutPassword(message) {
   document.getElementById('message').innerHTML = message;
   document.getElementById('message').style.color = 'red';
 }
-let password = document.querySelector('#pasword-first');
-password.addEventListener('input', cheakPassword);
-password.addEventListener('input', cheakEqualtoPwd);
+
 function cheakPassword() {
   // Spelled wrong but not a concern
   let pw = document.querySelector('#pasword-first').value;
@@ -98,8 +131,6 @@ function cheakPassword() {
   return false;
 }
 
-let submBtn = document.querySelector('#sign-in-submit');
-submBtn.addEventListener('click', saveUser);
 function saveUser(e) {
   e.preventDefault();
   document.getElementById('submit-error-message').innerHTML = '';
@@ -109,10 +140,10 @@ function saveUser(e) {
   }
   let firstName = document.querySelector('#first-name').value;
   let pwd = document.querySelector('#pasword-first').value;
-  console.log(pwd);
+  console.log('pwd', pwd);
   var inputName = document.getElementsByName('email-user-name')[0];
   let userName = inputName.value;
-  console.log(userName);
+  console.log('userName', userName);
   if (pwd === '' || firstName === '' || userName === '') {
     // Checks like this are unnecesary when you can use say 'required' in its html
     document.getElementById('submit-error-message').innerHTML =
@@ -147,10 +178,6 @@ function saveUser(e) {
   signForm.classList.toggle('hide');
   updateHeloUser();
 }
-let allImg = document.querySelectorAll('a');
-allImg.forEach(function (item) {
-  item.addEventListener('click', addMessage);
-});
 
 function addMessage(e) {
   console.log('g');
@@ -160,20 +187,18 @@ function addMessage(e) {
     loginMEssage.style.display = 'block';
   }
 }
-let closeDiv = document.getElementById('close-modal');
-closeDiv.addEventListener('click', () => {
-  let loginMEssage = document.getElementById('you-must-login');
-  loginMEssage.style.display = 'none';
-});
+
 function updateHeloUser() {
   currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
   let spanFName = document.getElementById('user-first-name');
   spanFName.innerHTML = 'hello ' + currentUser.firstName;
+  
   let spanUserName = document.getElementById('user-name');
   spanUserName.innerHTML = currentUser.userName;
+
   btnOpen.classList.add('hide');
   let helloUser = document.getElementById('hello-user');
   helloUser.classList.remove('hide');
-  let allImg = document.querySelectorAll('img');
-  allImg.forEach((img) => (img.style.opacity = 1));
+
+  toggleImageOpacity(true);
 }

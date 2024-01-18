@@ -33,10 +33,10 @@
                </ul>
             </div>
     </header>
-    <div class="form hide" id="sign-in-form">
+    <div class="form hide" id="sign-in-form" data-form-type="register">
         <button class="btn-close" type="button"></button>
         <br>
-        <button class="change-form" id="change-to-login" type="button">already have an acount? click to login</button>
+        <button class="change-form js-toggle-form" data-toggle-to="login" id="change-to-login" type="button">already have an acount? click to login</button>
         <form method="get">
             <div> <label for="first-name">first name</label>
                 <input type="text" id="first-name" name="first-name">
@@ -61,10 +61,10 @@
             <span class="message" id="submit-error-message"></span>
     </div>
 
-    <div class="form hide" id="login-form">
+    <div class="form hide" id="login-form" data-form-type="login">
         <button class="btn-close" type="button"></button>
         <br>
-        <button class="change-form" id="change-to-sign" type="button">don't have an account? sign-up</button>
+        <button class="change-form js-toggle-form" data-toggle-to="register" id="change-to-sign" type="button">don't have an account? sign-up</button>
         <h2>we are happy to see you again!</h2>
         <form>
             <div> <label for="user">email</label>
