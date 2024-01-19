@@ -1,6 +1,10 @@
 * {
   box-sizing: border-box;
 }
+html, body {
+  height: 100%;
+  width: 100%;
+}
 
 body {
   margin: 0%;
@@ -11,9 +15,8 @@ body {
   font-family: 'Pacifico', cursive;
 }
 
-form {
-  text-align: center;
-}
+.mt-16px { margin-top: 16px; }
+.mb-16px { margin-bottom: 16px; }
 
 .main-heading {
   text-align: center;
@@ -85,36 +88,27 @@ form {
 }
 
 .form {
-  width: 27%;
   background-color: white;
-  color: black;
+  border-radius: 16px;
   border: 3px solid #31a2ff;
-  margin-top: -7%;
-  margin-left: 37%;
+  bottom: 0;
+  color: black;
+  height: fit-content;
+  left: 0;
+  margin: auto;
+  max-width: 400px;
+  padding: 16px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  width: 100%;
   z-index: 99;
-  align-self: center;
-  z-index: 99;
-  position: fixed;
-}
-
-@media screen and (max-width: 1200px) {
-  .form {
-    width: 47%;
-    margin-left: 25%;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .form {
-    width: 96%;
-    margin-left: 2%;
-  }
 }
 
 .form input {
-  width: 96%;
-  padding: 3%;
-  margin: 0.5% 1% 0px 1%;
+  width: 100%;
+  padding: 16px;
   border: none;
   background: #bfb8b8;
 }
@@ -124,13 +118,13 @@ form {
 }
 
 .submit {
-  width: 96%;
-  border: none;
-  margin: 0.5% 1% 0px 1%;
-  padding: 3.5%;
   background: linear-gradient(magenta, #31a2ff, rgb(138, 12, 65));
+  border: none;
   color: white;
   font-size: 1.8em;
+  padding: 3.5%;
+  width: 100%;
+  border-radius: 16px;
 }
 
 .form input :focus {
@@ -179,8 +173,8 @@ form {
 
 .container img {
   border-radius: 30px;
-  width: 450px;
   height: 350px;
+  width: 450px;
 }
 
 @media screen and (max-width: 1150px) {
