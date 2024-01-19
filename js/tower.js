@@ -1,84 +1,11 @@
-// initial audio
-const backgroundMusic = new Audio('../audio/happy-day-113985.mp3');
-const successSound = new Audio('../audio/game-bonus-144751.mp3');
-const failure = new Audio('../audio/wah-wah-sad-trombone-6347.mp3');
-// ask to user agreement to music and sounds
-let playMusic = false;
-let agreementModal = document.getElementById('agree-to-sound');
-agreementModal.style.display = 'block';
-let closeAgreementModal = document.getElementById('close-modal-agreement'); //add event listener to the x button in the closal model to close it
-closeAgreementModal.addEventListener('click', () => {
-  agreementModal.style.display = 'none';
-});
-let agreementBtn = document.getElementById('agreement');
-agreementBtn.addEventListener('click', () => {
-  playMusic = true;
-  agreementModal.style.display = 'none';
-});
-
-let minmumBlockWidth;
-let horizontalDistance;
-let velocity;
-let parameter = new URLSearchParams(document.location.search);
-let level = parameter.get('level');
-switch (
-  level //defines some game's paramaters according to the level the user choosed
-) {
-  case 'beginer':
-    minmumBlockWidth = 112;
-    horizontalDistance = 60;
-    velocity = [0.15, 0.3];
-    break;
-  case 'advanced':
-    minmumBlockWidth = 100;
-    horizontalDistance = 70;
-    velocity = [0.2, 0.6];
-    break;
-  default:
-    minmumBlockWidth = 80;
-    horizontalDistance = 85;
-    velocity = [0.3, 0.8];
+class Modal {
+  constructor(elementId) {
+    this.modal = document.getElementById(elementId);
+  }
+  hide() { this.modal.style.display = 'none'; }
+  show() { this.modal.style.display = 'block'; }
 }
-let blocks = [];
-let heightToFirstBlock = 5;
-let firstDistanceToBlocks = 26;
-let verticalDistance = [27];
-let score = 0;
-let moveScreenFlag = false;
-let canvas = document.getElementById('myCanvas');
-let context = canvas.getContext('2d');
-let scoreSpan = document.querySelector('#score-span');
-scoreSpan.innerHTML = score;
-const imagePaths = [
-  '../image/first_block.png',
-  '../image/second-block.png',
-  '../image/third-block.png',
-];
-const blockImages = imagePaths.map((path) => {
-  const image = new Image();
-  image.src = path;
-  return image;
-});
-let step = 0;
-let inMiddleOfJump = false;
-let powerOfJump = -3;
-let gradient = context.createLinearGradient(0, 0, canvas.width, 0);
-let gradient2 = context.createLinearGradient(0, 0, canvas.width, 0);
-gradient.addColorStop('0.2', 'magenta');
-gradient.addColorStop('0.3', 'green');
-gradient.addColorStop('1.0', 'red');
-gradient2.addColorStop('0.2', 'red');
-gradient2.addColorStop('0.3', 'green');
-gradient2.addColorStop('1.0', 'blue');
-let tex = "LET'S ";
-let tex2 = 'START';
-let tex3 = 'GAME OVER';
-let texString1 = '';
-let texString2 = '';
-let alphabet_index = 0;
-blockImages[step].addEventListener('load', () => {
-  initBlocks();
-});
+
 class block {
   constructor(x, y, width, height, step) {
     this.x = x; // The x-coordinate of the block
@@ -93,6 +20,161 @@ class block {
     // Check if the block is under the character
     return character.y + character.height < this.y + this.height;
   }
+}
+
+const modalGameOver = new Modal('over-modal')
+const modalMusicAgreement = new Modal('agree-to-sound')
+
+const urlParams = new URLSearchParams(document.location.search);
+const canvas = document.getElementById('myCanvas');
+const context = canvas.getContext('2d');
+
+const music = {
+  isPlayMusic: false,
+  background: new Audio('../audio/happy-day-113985.mp3'),
+  success: new Audio('../audio/game-bonus-144751.mp3'),
+  failure: new Audio('../audio/wah-wah-sad-trombone-6347.mp3'),
+}
+
+const gameConf = setGameConfig()
+const keyboardEvents = ['keyup','keydown']
+const keyboard = { right: false, left: false, up: false, any: false };
+
+let blocks = [];
+let heightToFirstBlock = 5;
+let firstDistanceToBlocks = 26;
+let verticalDistance = [27];
+let score = 0;
+let moveScreenFlag = false;
+let scoreSpan = document.querySelector('#score-span');
+let step = 0;
+let inMiddleOfJump = false;
+let powerOfJump = -3;
+let gradient = context.createLinearGradient(0, 0, canvas.width, 0);
+let gradient2 = context.createLinearGradient(0, 0, canvas.width, 0);
+let tex = "LET'S ";
+let tex2 = 'START';
+let tex3 = 'GAME OVER';
+let texString1 = '';
+let texString2 = '';
+let alphabet_index = 0;
+let times = 0;
+let fondHighScore = false;
+let gameOver = false;
+
+let hero = sessionStorage.getItem('hero') || '../image/hero2_2.png';
+let character = { // Define the character object
+  x: canvas.width / 2 - 12.5,
+  y: canvas.height - 20,
+  height: 20,
+  width: 25,
+  distanceY: 0,
+  distanceX: 0,
+  onGround: true,
+};
+
+let characterImg = new Image(); // Create a new image object for the character
+characterImg.src = hero; // Set the source of the character image to the selected hero
+
+const imagePaths = [
+  '../image/first_block.png',
+  '../image/second-block.png',
+  '../image/third-block.png',
+];
+const blockImages = imagePaths.map((path) => {
+  const image = new Image();
+  image.src = path;
+  return image;
+});
+
+// INIT /////////////
+letStart();
+modalMusicAgreement.show();
+
+scoreSpan.innerHTML = score;
+gradient.addColorStop('0.2', 'magenta');
+gradient.addColorStop('0.3', 'green');
+gradient.addColorStop('1.0', 'red');
+gradient2.addColorStop('0.2', 'red');
+gradient2.addColorStop('0.3', 'green');
+gradient2.addColorStop('1.0', 'blue');
+mainLoop();
+drawCharacter();
+
+// EVENTS /////////////
+keyboardEvents.forEach((eventString)=>{
+  document.addEventListener(eventString, (e)=>{
+    let state = e.type === 'keydown'; // Check if the event type is keydown
+    
+    if (e.keyCode == 39) {
+      keyboard.right = state; // Set the right property of the keyboard object based on the key state
+    } else if (e.keyCode == 37) {
+      keyboard.left = state; // Set the left property of the keyboard object based on the key state
+    } else if (e.keyCode == 38) {
+      keyboard.up = state; // Set the up property of the keyboard object based on the key state
+      e.preventDefault(); // Prevent the default key up behavior (e.g., scrolling)
+    }
+
+    if (state) {
+      keyboard.any = true; // Set the any property of the keyboard object to true if any key is pressed
+    }
+  })
+})
+
+modalMusicAgreement.modal.querySelectorAll('button').forEach((el)=>{
+  el.addEventListener('click', ()=>{
+    modalMusicAgreement.hide();
+    if(el.classList.contains('btn-agree')){
+      music.isPlayMusic = true;
+    }
+  })
+})
+
+modalGameOver.modal.querySelector('#close-modal').addEventListener('click', ()=>{
+  modalGameOver.hide()
+})
+
+blockImages[step].addEventListener('load', () => {
+  initBlocks();
+});
+
+// Add an event listener to the character image to trigger the drawCharacter function once it's loaded
+characterImg.addEventListener('load', () => {
+  drawCharacter();
+});
+
+// FUNCTIONS /////////////
+function setGameConfig(){
+  const defaultConf = {
+    minBlockWidth: 0,
+    horizontalDistance: 0,
+    velocity: 0,
+    difficulty: urlParams.get('level') || 'beginner',
+    gravity: 1.0,
+    drag: 0.999,
+    groundDrag: 0.9,
+  }
+
+  let newConf = {}
+  
+  switch(defaultConf.difficulty){
+    case 'beginner':
+      newConf = { minBlockWidth: 112, horizontalDistance: 60, velocity: [0.15, 0.3] }
+      break;
+    case 'advanced':
+      newConf = { minBlockWidth: 100, horizontalDistance: 70, velocity: [0.2, 0.6] }
+      break;
+    case 'champions':
+      newConf = { minBlockWidth: 80, horizontalDistance: 85, velocity: [0.3, 0.8] }
+      break;
+    default:
+      newConf = { minBlockWidth: 112, horizontalDistance: 60, velocity: [0.15, 0.3] }
+      break;
+  }
+  
+  Object.assign(defaultConf, {...defaultConf, ...newConf})
+
+  return defaultConf
 }
 
 function randomMinMax(min, max) {
@@ -114,12 +196,12 @@ function drawBlocks() {
     );
   });
 }
-let times = 0;
+
 function movingScreen() {
   //move the blocks
   // Move each block downwards based on the velocity
   for (let i = 0; i < blocks.length; i++) {
-    blocks[i].y = blocks[i].y + velocity[1]; // Move the block downwards by adding the y-component of the velocity
+    blocks[i].y = blocks[i].y + gameConf.velocity[1]; // Move the block downwards by adding the y-component of the velocity
     if (blocks[i].y > canvas.height) {
       //if one of the stone is underground
       blocks.splice(i, 1); // Remove the block if it goes beyond the canvas height
@@ -147,12 +229,13 @@ function movingScreen() {
     }
   }
 }
+
 function initBlocks() {
   blocks = []; // Initialize the blocks array
   // Create the first block
   let width = randomMinMax(
-    minmumBlockWidth,
-    canvas.width * 0.09 + minmumBlockWidth
+    gameConf.minBlockWidth,
+    canvas.width * 0.09 + gameConf.minBlockWidth
   ); // Generate a random width for the block
   let height = 6; // Set the height of the block
   let x = randomMinMax(100, canvas.width - height) % (canvas.width - width); // Generate a random x-coordinate for the block
@@ -161,11 +244,11 @@ function initBlocks() {
   // Create the remaining blocks
   for (let i = 1; i < 5; i++) {
     width = randomMinMax(
-      minmumBlockWidth,
-      canvas.width * 0.09 + minmumBlockWidth
+      gameConf.minBlockWidth,
+      canvas.width * 0.09 + gameConf.minBlockWidth
     ); // Generate a random width for the block
     x =
-      (randomMinMax(horizontalDistance, horizontalDistance * 1.2) +
+      (randomMinMax(gameConf.horizontalDistance, gameConf.horizontalDistance * 1.2) +
         blocks[i - 1].x) %
       (canvas.width - width); // Calculate the x-coordinate of the block based on the previous block's position
     y = blocks[i - 1].y - verticalDistance[0]; // Calculate the y-coordinate of the block based on the previous block's position
@@ -173,6 +256,7 @@ function initBlocks() {
   }
   drawBlocks(); // Draw the blocks on the canvas
 }
+
 function letStart() {
   //animation with the words "let's start"
   if (alphabet_index < 5) {
@@ -205,19 +289,20 @@ function letStart() {
     }
   }
 }
+
 function addblock() {
   // Get the current length of the blocks array
   let i = blocks.length;
   // Generate random width of the new block within a given range
   let width = randomMinMax(
-    minmumBlockWidth,
-    canvas.width * 0.2 + minmumBlockWidth
+    gameConf.minBlockWidth,
+    canvas.width * 0.2 + gameConf.minBlockWidth
   );
   // Set the height of the new block
   let height = 6;
   // Calculate the x-coordinate of the new block based on the previous block's position
   let x =
-    (randomMinMax(0.5 * horizontalDistance, horizontalDistance * 1.3) +
+    (randomMinMax(0.5 * gameConf.horizontalDistance, gameConf.horizontalDistance * 1.3) +
       blocks[0].x) %
     (canvas.width - width);
   // Calculate the y-coordinate of the new block based on the previous block's position
@@ -225,26 +310,7 @@ function addblock() {
   // Create a new block object and add it to the blocks array
   blocks.push(new block(x, y, width, height, step));
 }
-// Get the selected hero from the session storage
-let hero = sessionStorage.getItem('hero');
-// Define the character object
-let character = {
-  x: canvas.width / 2 - 12.5,
-  y: canvas.height - 20,
-  height: 20,
-  width: 25,
-  distanceY: 0,
-  distanceX: 0,
-  onGround: true,
-};
-// Create a new image object for the character
-let characterImg = new Image();
-// Set the source of the character image to the selected hero
-characterImg.src = hero;
-// Add an event listener to the character image to trigger the drawCharacter function once it's loaded
-characterImg.addEventListener('load', () => {
-  drawCharacter();
-});
+
 function characterUp() {
   //Note that here, in js it is the opposite of a minus jump is a high jump
   // Set the character's onGround flag to false to indicate that it is in the air
@@ -261,14 +327,17 @@ function characterUp() {
   // Set the flag to indicate that the character is in the middle of a jump
   inMiddleOfJump = true;
 }
+
 function characterGoLeft() {
   // Set the character's horizontal distance to move left
   character.distanceX = -2;
 }
+
 function characterGoRight() {
   // Set the character's horizontal distance to move right
   character.distanceX = 2;
 }
+
 function updatePosition() {
   // Check if the character will go beyond the canvas boundaries
   if (
@@ -281,6 +350,7 @@ function updatePosition() {
   if (character.y + character.distanceY < 0) character.distanceY = 0; // Prevent the character from moving too high above the canvas
   character.y += character.distanceY; // Update the character's y-coordinate
 }
+
 function drawCharacter() {
   context.drawImage(
     characterImg,
@@ -290,11 +360,7 @@ function drawCharacter() {
     character.height
   ); // Draw the character image on the canvas
 }
-const game = {
-  gravity: 1.0,
-  drag: 0.999,
-  groundDrag: 0.9,
-};
+
 function checkState() {
   // Check if the character has reached the ground
   if (character.y + character.height >= canvas.height) {
@@ -320,6 +386,7 @@ function checkState() {
     }
   }
 }
+
 function updateScore() {
   // Iterate through each block in the blocks array
   blocks.forEach(function (block, index) {
@@ -338,14 +405,14 @@ function updateScore() {
 function gravity() {
   // Check if the character is not on the ground
   if (character.onGround == false) {
-    character.distanceY += game.gravity; // Apply gravity to the character's vertical movement
-    character.distanceY *= game.drag; // Apply drag to the character's vertical movement
+    character.distanceY += gameConf.gravity; // Apply gravity to the character's vertical movement
+    character.distanceY *= gameConf.drag; // Apply drag to the character's vertical movement
   } else {
     character.distanceY = 0; // Reset the character's vertical movement to 0 when on the ground
   }
 
   // Adjust the character's horizontal movement based on whether it is on the ground or not
-  character.distanceX *= character.onGround ? game.groundDrag : game.drag;
+  character.distanceX *= character.onGround ? gameConf.groundDrag : gameConf.drag;
   // Note: This line allows the character to move horizontally without being affected by the groundDrag when it is on the ground
 }
 
@@ -367,16 +434,6 @@ function movingBlocks() {
   character.y += 0.2; // Move the character downwards by 0.2
 }
 
-document.addEventListener('keydown', keyHandler); // Add event listener for keydown event
-document.addEventListener('keyup', keyHandler); // Add event listener for keyup event
-
-const keyboard = {
-  right: false,
-  left: false,
-  up: false,
-  any: false,
-};
-
 function keyHandler(e) {
   let state = e.type === 'keydown'; // Check if the event type is keydown
   if (e.keyCode == 39) {
@@ -391,14 +448,11 @@ function keyHandler(e) {
     keyboard.any = true; // Set the any property of the keyboard object to true if any key is pressed
   }
 }
-let gameOver = false;
-mainLoop();
-letStart();
-let fondHighScore = false;
+
 function mainLoop() {
   //the loop that works while the game. It calls the functions
-  if (playMusic) {
-    backgroundMusic.play();
+  if (music.isPlayMusic) {
+    music.background.play();
   }
 
   if (gameOver == false) {
@@ -427,8 +481,8 @@ function mainLoop() {
       if (character.onGround) updateScore();
       if (score > 25 && !step == 1) {
         step = 1;
-        if (playMusic) {
-          successSound.play();
+        if (music.isPlayMusic) {
+          music.success.play();
         }
 
         cancelAnimationFrame(mainLoop);
@@ -436,8 +490,8 @@ function mainLoop() {
       if (score > 50 && step != 2) {
         step = 2;
 
-        if (playMusic) {
-          successSound.play();
+        if (music.isPlayMusic) {
+          music.success.play();
         }
       }
       drawBlocks();
@@ -445,9 +499,9 @@ function mainLoop() {
     }
     myanim = requestAnimationFrame(mainLoop);
   } else {
-    if (playMusic) {
-      backgroundMusic.pause();
-      failure.play();
+    if (music.isPlayMusic) {
+      music.background.pause();
+      music.failure.play();
     }
 
     alphabet_index = 0;
@@ -485,8 +539,7 @@ function mainLoop() {
     gradientAnimation();
   }
 }
-drawCharacter();
-mainLoop();
+
 function gradientAnimation() {
   //the animation in of game  over in the end of the game
   if (alphabet_index == 9) {
@@ -517,12 +570,6 @@ function gradientAnimation() {
   if (alphabet_index <= 18) setTimeout(gradientAnimation, 100);
   else {
     //when we finished introduct "game over" twice
-    let overMOdal = document.getElementById('over-modal');
-    overMOdal.style.display = 'block';
+    modalGameOver.show()
   }
 }
-let closeDiv = document.getElementById('close-modal'); //add event listener to the x button in the closal model to close it
-closeDiv.addEventListener('click', () => {
-  let overMOdal = document.getElementById('over-modal');
-  overMOdal.style.display = 'none';
-});
