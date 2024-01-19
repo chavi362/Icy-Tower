@@ -429,21 +429,6 @@ function movingBlocks() {
   character.y += 0.2; // Move the character downwards by 0.2
 }
 
-function keyHandler(e) {
-  let state = e.type === 'keydown'; // Check if the event type is keydown
-  if (e.keyCode == 39) {
-    keyboard.right = state; // Set the right property of the keyboard object based on the key state
-  } else if (e.keyCode == 37) {
-    keyboard.left = state; // Set the left property of the keyboard object based on the key state
-  } else if (e.keyCode == 38) {
-    keyboard.up = state; // Set the up property of the keyboard object based on the key state
-    e.preventDefault(); // Prevent the default key up behavior (e.g., scrolling)
-  }
-  if (state) {
-    keyboard.any = true; // Set the any property of the keyboard object to true if any key is pressed
-  }
-}
-
 function mainLoop() {
   //the loop that works while the game. It calls the functions
   if (music.isPlayMusic) {
