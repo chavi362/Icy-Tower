@@ -39,17 +39,17 @@ const music = {
 const gameConf = setGameConfig()
 const keyboardEvents = ['keyup','keydown']
 const keyboard = { right: false, left: false, up: false, any: false };
+const gameState = {
+  inMiddleOfJump: false,
+  isGameOver: false,
+  isHighScore: false,
+  powerOfJump: -3,
+  score: 0,
+  step: 0,
+  times: 0,
+}
 
 let blocks = [];
-let heightToFirstBlock = 5;
-let firstDistanceToBlocks = 26;
-let verticalDistance = [27];
-let score = 0;
-let moveScreenFlag = false;
-let scoreSpan = document.querySelector('#score-span');
-let step = 0;
-let inMiddleOfJump = false;
-let powerOfJump = -3;
 let gradient = context.createLinearGradient(0, 0, canvas.width, 0);
 let gradient2 = context.createLinearGradient(0, 0, canvas.width, 0);
 let tex = "LET'S ";
@@ -58,11 +58,7 @@ let tex3 = 'GAME OVER';
 let texString1 = '';
 let texString2 = '';
 let alphabet_index = 0;
-let times = 0;
-let fondHighScore = false;
-let gameOver = false;
 
-let hero = sessionStorage.getItem('hero') || '../image/hero2_2.png';
 let character = { // Define the character object
   x: canvas.width / 2 - 12.5,
   y: canvas.height - 20,
@@ -74,13 +70,14 @@ let character = { // Define the character object
 };
 
 let characterImg = new Image(); // Create a new image object for the character
-characterImg.src = hero; // Set the source of the character image to the selected hero
+characterImg.src = gameConf.heroImagePath; // Set the source of the character image to the selected hero
 
 const imagePaths = [
   '../image/first_block.png',
   '../image/second-block.png',
   '../image/third-block.png',
 ];
+
 const blockImages = imagePaths.map((path) => {
   const image = new Image();
   image.src = path;
@@ -91,13 +88,14 @@ const blockImages = imagePaths.map((path) => {
 letStart();
 modalMusicAgreement.show();
 
-scoreSpan.innerHTML = score;
+displayScore();
 gradient.addColorStop('0.2', 'magenta');
 gradient.addColorStop('0.3', 'green');
 gradient.addColorStop('1.0', 'red');
 gradient2.addColorStop('0.2', 'red');
 gradient2.addColorStop('0.3', 'green');
 gradient2.addColorStop('1.0', 'blue');
+
 mainLoop();
 drawCharacter();
 
@@ -134,7 +132,7 @@ modalGameOver.modal.querySelector('#close-modal').addEventListener('click', ()=>
   modalGameOver.hide()
 })
 
-blockImages[step].addEventListener('load', () => {
+blockImages[gameState.step].addEventListener('load', () => {
   initBlocks();
 });
 
@@ -148,11 +146,14 @@ function setGameConfig(){
   const defaultConf = {
     minBlockWidth: 0,
     horizontalDistance: 0,
+    verticalDistance: [27],
+    firstDistanceToBlocks: 26,
     velocity: 0,
     difficulty: urlParams.get('level') || 'beginner',
     gravity: 1.0,
     drag: 0.999,
     groundDrag: 0.9,
+    heroImagePath: sessionStorage.getItem('hero') || '../image/hero2_2.png'
   }
 
   let newConf = {}
@@ -177,6 +178,27 @@ function setGameConfig(){
   return defaultConf
 }
 
+const moveChar = {
+  up: function(){
+    //Note that here, in js it is the opposite of a minus jump is a high jump
+    // Set the character's onGround flag to false to indicate that it is in the air
+    character.onGround = false;
+
+    // Check if the character is not in the middle of a jump
+    if (!gameState.inMiddleOfJump) gameState.powerOfJump = -3; // Set the initial jump power
+    else gameState.powerOfJump += 0.2; // Increase the jump power if the character is already jumping
+
+    // Limit the maximum jump power to -0.3
+    if (gameState.powerOfJump >= -0.3) gameState.powerOfJump = -0.4;
+    // Add the jump power to the character's vertical distance
+    character.distanceY += gameState.powerOfJump;
+    // Set the flag to indicate that the character is in the middle of a jump
+    gameState.inMiddleOfJump = true;
+  },
+  left: function(){ character.distanceX = -2; },
+  right: function(){ character.distanceX = 2; }
+}
+
 function randomMinMax(min, max) {
   // Generate a random number between min and max (inclusive)
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -188,7 +210,7 @@ function drawBlocks() {
     //Chooses the image according to the current step of the game
     //(not the level you chose at the beginning but when you progress and accumulate points, the game becomes more difficult)
     context.drawImage(
-      blockImages[step],
+      blockImages[gameState.step],
       item.x,
       item.y,
       item.width,
@@ -209,23 +231,23 @@ function movingScreen() {
     }
   }
   // Move the current block to the sides only if the game is in advanced step
-  if (step == 1) {
-    times++; // Increase the times variable
-    if (times <= 3) {
+  if (gameState.step == 1) {
+    gameState.times++; // Increase the times variable
+    if (gameState.times <= 3) {
       blocks[currentBlock].x = blocks[currentBlock].x + 8.5; // Move the block to the right by adding 8.5 to its x-coordinate
     }
-    if (times <= 6 && times > 3) {
+    if (gameState.times <= 6 && gameState.times > 3) {
       blocks[currentBlock].x = blocks[currentBlock].x - 7; // Move the block to the left by subtracting 7 from its x-coordinate
-      if (times == 6) times = 0; // Reset the times variable to 0 when it reaches 6
+      if (gameState.times == 6) gameState.times = 0; // Reset the times variable to 0 when it reaches 6
     }
-  } else if (step == 2) {
-    times++;
-    if (times < 3) {
+  } else if (gameState.step == 2) {
+    gameState.times++;
+    if (gameState.times < 3) {
       blocks[currentBlock].x = blocks[currentBlock].x + 13;
     }
-    if (times <= 6 && times > 3) {
+    if (gameState.times <= 6 && gameState.times > 3) {
       blocks[currentBlock].x = blocks[currentBlock].x - 10;
-      if (times == 6) times = 0;
+      if (gameState.times == 6) gameState.times = 0;
     }
   }
 }
@@ -239,8 +261,8 @@ function initBlocks() {
   ); // Generate a random width for the block
   let height = 6; // Set the height of the block
   let x = randomMinMax(100, canvas.width - height) % (canvas.width - width); // Generate a random x-coordinate for the block
-  let y = canvas.height - firstDistanceToBlocks - height; // Calculate the y-coordinate of the block
-  blocks.push(new block(x, y, width, height, step)); // Add the block to the blocks array
+  let y = canvas.height - gameConf.firstDistanceToBlocks - height; // Calculate the y-coordinate of the block
+  blocks.push(new block(x, y, width, height, gameState.step)); // Add the block to the blocks array
   // Create the remaining blocks
   for (let i = 1; i < 5; i++) {
     width = randomMinMax(
@@ -251,8 +273,8 @@ function initBlocks() {
       (randomMinMax(gameConf.horizontalDistance, gameConf.horizontalDistance * 1.2) +
         blocks[i - 1].x) %
       (canvas.width - width); // Calculate the x-coordinate of the block based on the previous block's position
-    y = blocks[i - 1].y - verticalDistance[0]; // Calculate the y-coordinate of the block based on the previous block's position
-    blocks.push(new block(x, y, width, height, step)); // Add the block to the blocks array
+    y = blocks[i - 1].y - gameConf.verticalDistance[0]; // Calculate the y-coordinate of the block based on the previous block's position
+    blocks.push(new block(x, y, width, height, gameState.step)); // Add the block to the blocks array
   }
   drawBlocks(); // Draw the blocks on the canvas
 }
@@ -306,36 +328,9 @@ function addblock() {
       blocks[0].x) %
     (canvas.width - width);
   // Calculate the y-coordinate of the new block based on the previous block's position
-  let y = blocks[i - 1].y - verticalDistance - height * 1.5;
+  let y = blocks[i - 1].y - gameConf.verticalDistance - height * 1.5;
   // Create a new block object and add it to the blocks array
-  blocks.push(new block(x, y, width, height, step));
-}
-
-function characterUp() {
-  //Note that here, in js it is the opposite of a minus jump is a high jump
-  // Set the character's onGround flag to false to indicate that it is in the air
-  character.onGround = false;
-
-  // Check if the character is not in the middle of a jump
-  if (!inMiddleOfJump) powerOfJump = -3; // Set the initial jump power
-  else powerOfJump += 0.2; // Increase the jump power if the character is already jumping
-
-  // Limit the maximum jump power to -0.3
-  if (powerOfJump >= -0.3) powerOfJump = -0.4;
-  // Add the jump power to the character's vertical distance
-  character.distanceY += powerOfJump;
-  // Set the flag to indicate that the character is in the middle of a jump
-  inMiddleOfJump = true;
-}
-
-function characterGoLeft() {
-  // Set the character's horizontal distance to move left
-  character.distanceX = -2;
-}
-
-function characterGoRight() {
-  // Set the character's horizontal distance to move right
-  character.distanceX = 2;
+  blocks.push(new block(x, y, width, height, gameState.step));
 }
 
 function updatePosition() {
@@ -366,8 +361,8 @@ function checkState() {
   if (character.y + character.height >= canvas.height) {
     character.onGround = true; // Set the character's onGround flag to true
 
-    if (score / 3 > 3) {
-      gameOver = true; // Set the gameOver flag to true if a condition is met
+    if (gameState.score / 3 > 3) {
+      gameState.isGameOver = true; // Set the isGameOver flag to true if a condition is met
     } // game over condition
   } else {
     character.onGround = false; // Set the character's onGround flag to false
@@ -394,12 +389,12 @@ function updateScore() {
     if (block.IsUnderCharacter()) {
       // Check if the block has not been scored yet
       if (!block.scoreBlock) {
-        score += 3; // Increase the score by 3
+        gameState.score += 3; // Increase the score by 3
         block.scoreBlock = true; // Set the scoreBlock flag to true to indicate that the block has been scored
       }
     }
   });
-  scoreSpan.innerHTML = score; // Update the score displayed on the screen
+  displayScore(); // Update the score displayed on the screen
 }
 
 function gravity() {
@@ -455,49 +450,45 @@ function mainLoop() {
     music.background.play();
   }
 
-  if (gameOver == false) {
+  if (gameState.isGameOver == false) {
     if (keyboard.any) {
       context.clearRect(0, 0, canvas.width, canvas.height);
-      if (keyboard.up) {
-        characterUp();
-      } else inMiddleOfJump = false;
-      if (keyboard.left) {
-        characterGoLeft();
-      }
-      if (keyboard.right) {
-        characterGoRight();
-      }
+      if (keyboard.up) { moveChar.up(); } else { gameState.inMiddleOfJump = false; }
+      if (keyboard.left) { moveChar.left(); }
+      if (keyboard.right) { moveChar.right(); }
+
       updatePosition();
-      if (score / 3 > 5) {
-        movingScreen();
-      }
+
+      if (gameState.score / 3 > 5) { movingScreen(); }
+
       checkState();
       gravity();
+      
       if (character.y < 70 && character.onGround) {
         context.clearRect(0, 0, canvas.width, canvas.height);
         movingBlocks();
         character.onGround = false;
       }
-      if (character.onGround) updateScore();
-      if (score > 25 && !step == 1) {
-        step = 1;
-        if (music.isPlayMusic) {
-          music.success.play();
-        }
 
+      if (character.onGround) { updateScore(); }
+
+      if (gameState.score > 25 && !gameState.step == 1) {
+        gameState.step = 1;
+        if (music.isPlayMusic) { music.success.play(); }
         cancelAnimationFrame(mainLoop);
       }
-      if (score > 50 && step != 2) {
-        step = 2;
 
-        if (music.isPlayMusic) {
-          music.success.play();
-        }
+      if (gameState.score > 50 && gameState.step != 2) {
+        gameState.step = 2;
+        if (music.isPlayMusic) { music.success.play(); }
       }
+
       drawBlocks();
       drawCharacter();
     }
+
     myanim = requestAnimationFrame(mainLoop);
+
   } else {
     if (music.isPlayMusic) {
       music.background.pause();
@@ -509,21 +500,21 @@ function mainLoop() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     drawBlocks();
     drawCharacter();
-    tex2 = 'your score is ' + score;
+    tex2 = 'your score is ' + gameState.score;
     texString1 = ' ';
     let currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
-    if (score > currentUser.highScore) {
-      fondHighScore = true;
+    if (gameState.score > currentUser.highScore) {
+      gameState.isHighScore = true;
       console.log('if');
       let temp = currentUser.highScore;
-      currentUser.highScore = score;
+      currentUser.highScore = gameState.score;
       currentUser.secondScore = temp;
-    } else if (score > currentUser.secondScore && !fondHighScore) {
-      fondHighScore = true;
+    } else if (gameState.score > currentUser.secondScore && !gameState.isHighScore) {
+      gameState.isHighScore = true;
       console.log('else if');
-      currentUser.secondScore = score;
+      currentUser.secondScore = gameState.score;
     }
-    if (fondHighScore) {
+    if (gameState.isHighScore) {
       let userInLocal = JSON.parse(
         localStorage.getItem(currentUser['userName'])
       );
@@ -572,4 +563,8 @@ function gradientAnimation() {
     //when we finished introduct "game over" twice
     modalGameOver.show()
   }
+}
+
+function displayScore(){
+  document.querySelector('#score-span').innerHTML = gameState.score;
 }
