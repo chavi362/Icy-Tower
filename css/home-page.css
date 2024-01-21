@@ -2,18 +2,35 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
 body {
-  margin: 0%;
   background-image: url('../image/background-for-game.png');
   background-repeat: no-repeat;
   background-size: cover;
-  text-align: center;
   font-family: 'Pacifico', cursive;
+  margin: 0%;
+  text-align: center;
 }
 
-form {
-  text-align: center;
+body.modal-open {
+  overflow: hidden;
 }
+
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 100%;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.mt-16px { margin-top: 16px; }
+.mb-16px { margin-bottom: 16px; }
+.text-start { text-align: left; }
 
 .main-heading {
   text-align: center;
@@ -84,37 +101,36 @@ form {
   position: relative;
 }
 
-.form {
-  width: 27%;
-  background-color: white;
-  color: black;
-  border: 3px solid #31a2ff;
-  margin-top: -7%;
-  margin-left: 37%;
-  z-index: 99;
-  align-self: center;
-  z-index: 99;
+.modal {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
   position: fixed;
+  visibility: hidden;
+  width: 100%;
+  z-index: -1;
+}
+.modal.show {
+  visibility: visible;
+  z-index: 999;
 }
 
-@media screen and (max-width: 1200px) {
-  .form {
-    width: 47%;
-    margin-left: 25%;
-  }
+.modal-dialog {
+  margin: 80px auto auto auto;
+  max-width: 500px;
+  position: relative;
 }
 
-@media screen and (max-width: 600px) {
-  .form {
-    width: 96%;
-    margin-left: 2%;
-  }
+.modal-content {
+  background-color: white;
+  border-radius: 16px;
+  border: 3px solid #31a2ff;
+  padding: 16px;
 }
 
 .form input {
-  width: 96%;
-  padding: 3%;
-  margin: 0.5% 1% 0px 1%;
+  width: 100%;
+  padding: 16px;
   border: none;
   background: #bfb8b8;
 }
@@ -124,13 +140,13 @@ form {
 }
 
 .submit {
-  width: 96%;
-  border: none;
-  margin: 0.5% 1% 0px 1%;
-  padding: 3.5%;
   background: linear-gradient(magenta, #31a2ff, rgb(138, 12, 65));
+  border: none;
   color: white;
   font-size: 1.8em;
+  padding: 3.5%;
+  width: 100%;
+  border-radius: 16px;
 }
 
 .form input :focus {
@@ -179,8 +195,8 @@ form {
 
 .container img {
   border-radius: 30px;
-  width: 450px;
   height: 350px;
+  width: 450px;
 }
 
 @media screen and (max-width: 1150px) {
@@ -236,24 +252,19 @@ form {
 }
 
 .change-form {
-  color: #315bff;
-  border: 1px solid #ccc;
   border-radius: 30px;
-  height: 29px;
+  border: 1px solid #ccc;
+  color: #315bff;
   font-family: 'Pacifico', cursive;
   font-size: 1.1em;
 }
 
 .btn-close {
-  border: none;
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  display: block;
-  width: 28px;
-  height: 28px;
   background: url(../image/close-window.png) no-repeat;
-  font-family: 'Pacifico', cursive;
+  border: none;
+  cursor: pointer;
+  height: 22px;
+  width: 29px;
 }
 #close-modal {
   color: #aaa;
