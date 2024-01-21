@@ -1,22 +1,36 @@
 * {
   box-sizing: border-box;
 }
+
 html, body {
   height: 100%;
   width: 100%;
 }
 
 body {
-  margin: 0%;
   background-image: url('../image/background-for-game.png');
   background-repeat: no-repeat;
   background-size: cover;
-  text-align: center;
   font-family: 'Pacifico', cursive;
+  margin: 0%;
+  text-align: center;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 100%;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
 
 .mt-16px { margin-top: 16px; }
 .mb-16px { margin-bottom: 16px; }
+.text-start { text-align: left; }
 
 .main-heading {
   text-align: center;
@@ -87,23 +101,31 @@ body {
   position: relative;
 }
 
-.form {
+.modal {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: fixed;
+  visibility: hidden;
+  width: 100%;
+  z-index: -1;
+}
+.modal.show {
+  visibility: visible;
+  z-index: 999;
+}
+
+.modal-dialog {
+  margin: 80px auto auto auto;
+  max-width: 500px;
+  position: relative;
+}
+
+.modal-content {
   background-color: white;
   border-radius: 16px;
   border: 3px solid #31a2ff;
-  bottom: 0;
-  color: black;
-  height: fit-content;
-  left: 0;
-  margin: auto;
-  max-width: 400px;
   padding: 16px;
-  position: absolute;
-  right: 0;
-  text-align: center;
-  top: 0;
-  width: 100%;
-  z-index: 99;
 }
 
 .form input {
@@ -230,24 +252,19 @@ body {
 }
 
 .change-form {
-  color: #315bff;
-  border: 1px solid #ccc;
   border-radius: 30px;
-  height: 29px;
+  border: 1px solid #ccc;
+  color: #315bff;
   font-family: 'Pacifico', cursive;
   font-size: 1.1em;
 }
 
 .btn-close {
-  border: none;
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  display: block;
-  width: 28px;
-  height: 28px;
   background: url(../image/close-window.png) no-repeat;
-  font-family: 'Pacifico', cursive;
+  border: none;
+  cursor: pointer;
+  height: 22px;
+  width: 29px;
 }
 #close-modal {
   color: #aaa;

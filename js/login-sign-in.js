@@ -1,14 +1,57 @@
-let btnOpen = document.querySelector('#open-form');
-const btnListClose = document.querySelectorAll('.btn-close');
+class Modal {
+  constructor(elementId) {
+    this.modal = document.getElementById(elementId);
+    try{
+      this.modal.querySelector('.btn-close-modal').addEventListener('click', ()=>{
+        this.hide()
+      })
+    } catch(e) {}
+    
+  }
+  hide() {
+    this.modal.classList.add('hide');
+    this.modal.classList.remove('show');
+    this.checkAllModalState();
+  }
+  show() {
+    this.modal.classList.add('show');
+    this.modal.classList.remove('hide');
+    this.checkAllModalState();
+  }
+  checkAllModalState(){
+    let isModalOpen = false;
+    const docbody = document.getElementsByTagName('body')[0];
+    docbody.classList.remove('modal-open');
+    document.querySelectorAll('.modal').forEach((el)=>{
+      if(el.classList.contains('show')){
+        docbody.classList.add('modal-open');
+        isModalOpen = true;
+      }
+    })
+
+    if(isModalOpen){
+      const overlayLayer = document.createElement("div");
+      overlayLayer.className = 'modal-overlay';
+      docbody.append(overlayLayer);
+    } else {
+      const overlayLayer = docbody.getElementsByClassName('modal-overlay');
+      docbody.removeChild(overlayLayer[0]);
+    }
+  }
+}
+
+const btnOpen = document.querySelector('#open-form');
 let verifyPwd = document.querySelector('#verify-pwd');
 let password = document.querySelector('#pasword-first');
 let submBtn = document.querySelector('#sign-in-submit');
 let allImg = document.querySelectorAll('a');
 let closeDiv = document.getElementById('close-modal');
-let isFormOpen = false;
-let cheakLogin = document.querySelector('#login-submit');
-const formList = document.querySelectorAll('div.form')
-const btnToggleForm = document.getElementsByClassName('js-toggle-form')
+let checkLogin = document.querySelector('#login-submit');
+const modalList = document.querySelectorAll('div.modal');
+const btnToggleForm = document.getElementsByClassName('js-toggle-form');
+
+const modalLogin = new Modal('modal-login');
+const modalRegister = new Modal('modal-register');
 
 if (sessionStorage.getItem('currentUser') != null) {
   updateHeloUser();
@@ -17,29 +60,20 @@ if (sessionStorage.getItem('currentUser') != null) {
 // EVENTS /////////////
 Object.keys(btnToggleForm).forEach((i)=>{
   btnToggleForm[i].addEventListener('click', (e)=>{
-    formList.forEach((el)=>{
+    modalList.forEach((el)=>{
       if(e.target.dataset.toggleTo === el.dataset.formType){
-        el.classList.remove('hide')
+        el.classList.remove('hide');
+        el.classList.add('show');
       } else {
-        el.classList.add('hide')
+        el.classList.remove('show');
+        el.classList.add('hide');
       }
     })
   })
 })
 
-btnListClose.forEach((item)=>{
-  item.addEventListener('click', ()=>{
-    location.reload();
-  });
-})
-
 btnOpen.addEventListener('click', () => {
-  if (isFormOpen) return;
-  isFormOpen = true;
-  let form = document.querySelector('#login-form');
-  if (window.screen.height < 600) form.style.position = 'absolute';
-  form.classList.remove('hide');
-  toggleImageOpacity(false);
+  modalLogin.show();
 });
 
 closeDiv.addEventListener('click', () => {
@@ -52,10 +86,10 @@ allImg.forEach(function (item) {
 });
 
 submBtn.addEventListener('click', saveUser);
-cheakLogin.addEventListener('click', cheakLoginValidation);
-password.addEventListener('input', cheakPassword);
-password.addEventListener('input', cheakEqualtoPwd);
-verifyPwd.addEventListener('input', cheakEqualtoPwd);
+checkLogin.addEventListener('click', checkLoginValidation);
+password.addEventListener('input', checkPassword);
+password.addEventListener('input', checkEqualtoPwd);
+verifyPwd.addEventListener('input', checkEqualtoPwd);
 
 // FUNCTIONS /////////////
 function toggleImageOpacity(state){
@@ -67,7 +101,7 @@ function toggleImageOpacity(state){
   }
 }
 
-function cheakLoginValidation(e) {
+function checkLoginValidation(e) {
   e.preventDefault();
   let massege = document.querySelector('#error-massage');
   let password = document.querySelector('#pwd').value;
@@ -86,12 +120,11 @@ function cheakLoginValidation(e) {
   };
   sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
   massege.classList.add('hide');
-  let loginForm = document.querySelector('#login-form');
-  loginForm.classList.toggle('hide');
+  modalLogin.hide()
   updateHeloUser();
 }
 
-function cheakEqualtoPwd() {
+function checkEqualtoPwd() {
   let pw = document.querySelector('#pasword-first').value;
   if (pw != document.querySelector('#verify-pwd').value) {
     document.querySelector('#verify-message').classList.remove('hide');
@@ -103,24 +136,24 @@ function cheakEqualtoPwd() {
   }
 }
 
-function addMEssageAboutPassword(message) {
+function addMessageAboutPassword(message) {
   document.getElementById('message').innerHTML = message;
   document.getElementById('message').style.color = 'red';
 }
 
-function cheakPassword() {
+function checkPassword() {
   // Spelled wrong but not a concern
   let pw = document.querySelector('#pasword-first').value;
   if (pw.length < 8) {
-    addMEssageAboutPassword('**Password length must be at least 8 characters');
+    addMessageAboutPassword('**Password length must be at least 8 characters');
   } else if (pw.length > 35) {
-    addMEssageAboutPassword('**Password length must not exceed 35 characters');
+    addMessageAboutPassword('**Password length must not exceed 35 characters');
   } else if (pw.search(/\d/) == -1) {
-    addMEssageAboutPassword(
+    addMessageAboutPassword(
       '**Password length must contain at least one number'
     );
   } else if (pw.search(/[a-zA-Z]/) == -1) {
-    addMEssageAboutPassword(
+    addMessageAboutPassword(
       '**Password must contain at least one English letter'
     );
   } else {
@@ -135,7 +168,7 @@ function saveUser(e) {
   e.preventDefault();
   document.getElementById('submit-error-message').innerHTML = '';
   let isOk = true;
-  if (cheakPassword() == false || cheakEqualtoPwd() == false) {
+  if (checkPassword() == false || checkEqualtoPwd() == false) {
     isOk = false;
   }
   let firstName = document.querySelector('#first-name').value;
@@ -174,8 +207,7 @@ function saveUser(e) {
   localStorage.setItem(userName, JSON.stringify(user));
   log = true;
   sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
-  let signForm = document.querySelector('#sign-in-form');
-  signForm.classList.toggle('hide');
+  modalRegister.hide();
   updateHeloUser();
 }
 
@@ -190,14 +222,14 @@ function addMessage(e) {
 
 function updateHeloUser() {
   currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
-  let spanFName = document.getElementById('user-first-name');
+  const spanFName = document.getElementById('user-first-name');
   spanFName.innerHTML = 'hello ' + currentUser.firstName;
   
-  let spanUserName = document.getElementById('user-name');
+  const spanUserName = document.getElementById('user-name');
   spanUserName.innerHTML = currentUser.userName;
 
   btnOpen.classList.add('hide');
-  let helloUser = document.getElementById('hello-user');
+  const helloUser = document.getElementById('hello-user');
   helloUser.classList.remove('hide');
 
   toggleImageOpacity(true);

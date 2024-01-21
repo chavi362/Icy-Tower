@@ -30,58 +30,66 @@
                 <li class="c-rainbow__layer c-rainbow__layer--blue">Icy-Tower</li>
                 <li class="c-rainbow__layer c-rainbow__layer--green">Icy-Tower</li>
                 <li class="c-rainbow__layer c-rainbow__layer--yellow">Icy-Tower</li>
-               </ul>
-            </div>
+            </ul>
+        </div>
     </header>
-    <div class="form hide" id="sign-in-form" data-form-type="register">
-        <button class="btn-close" type="button"></button>
-        <br>
-        <button class="change-form js-toggle-form" data-toggle-to="login" id="change-to-login" type="button">already have an acount? click to login</button>
-        <form method="get">
-            <div class="mt-16px mb-16px">
-                <label for="first-name">first name</label>
-                <input type="text" id="first-name" name="first-name">
+    
+
+    <div id="modal-register" class="modal hide" data-form-type="register">
+        <div class="modal-dialog">
+            <div class="form modal-content">
+                <div class="text-start"><button class="btn-close btn-close-modal" type="button"></button></div>
+                <button class="change-form js-toggle-form" data-toggle-to="login" id="change-to-login" type="button">already have an acount? click to login</button>
+                <form method="get">
+                    <div class="mt-16px mb-16px">
+                        <label for="first-name">first name</label>
+                        <input type="text" id="first-name" name="first-name">
+                    </div>
+                    <div class="mt-16px mb-16px">
+                        <label for="email">email</label>
+                        <input  name="email-user-name" type="email" id="user-name" placeholder="this will be your user name">
+                    </div>
+                    <div class="mt-16px mb-16px">
+                        <label for="pwd">Password</label>
+                        <br>
+                        <input type="password" id="pasword-first" name="pwd" placeholder="your password">
+                        <span id="message" class="message"></span>
+                    </div> 
+                    <div class="mt-16px mb-16px">
+                        <label for="verify password">verify Password</label>
+                        <input type="password" id="verify-pwd" name="verify password" placeholder="retype your password">
+                        <span class="hide" id="verify-message">**Enter the password here again</span>
+                    </div>
+                    <button class="submit" id="sign-in-submit">sign-up</button>
+                    <br />
+                    <span class="message" id="submit-error-message"></span>
+                </form>
             </div>
-            <div class="mt-16px mb-16px">
-                <label for="email">email</label>
-                <input  name="email-user-name" type="email" id="user-name" placeholder="this will be your user name">
-            </div>
-            <div class="mt-16px mb-16px">
-                <label for="pwd">Password</label>
-                <br>
-                <input type="password" id="pasword-first" name="pwd" placeholder="your password">
-                <span id="message" class="message"></span>
-            </div> 
-            <div class="mt-16px mb-16px">
-                <label for="verify password">verify Password</label>
-                <input type="password" id="verify-pwd" name="verify password" placeholder="retype your password">
-                <span class="hide" id="verify-message">**Enter the password here again</span>
-            </div>
-            <button class="submit" id="sign-in-submit">sign-up</button>
-            <br />
-            <span class="message" id="submit-error-message"></span>
-        </form>
+        </div>
     </div>
 
-    <div class="form hide" id="login-form" data-form-type="login">
-        <button class="btn-close" type="button"></button>
-        <br>
-        <button class="change-form js-toggle-form" data-toggle-to="register" id="change-to-sign" type="button">don't have an account? sign-up</button>
-        <h2>we are happy to see you again!</h2>
-        <form>
-            <div class="mt-16px mb-16px">
-                <label for="user">email</label>
-                <input type="email" id="email" name="user" required="required">
+    <div id="modal-login" class="modal hide" data-form-type="login">
+        <div class="modal-dialog">
+            <div class="form modal-content">
+                <div class="text-start"><button class="btn-close btn-close-modal" type="button"></button></div>
+                <button class="change-form js-toggle-form" data-toggle-to="register" id="change-to-sign" type="button">don't have an account? sign-up</button>
+                <h2>we are happy to see you again!</h2>
+                <form>
+                    <div class="mt-16px mb-16px">
+                        <label for="user">email</label>
+                        <input type="email" id="email" name="user" required="required">
+                    </div>
+                    <div class="mt-16px mb-16px">
+                        <label for="pwd">Password</label>
+                        <input type="password" id="pwd" name="pwd" required="required">
+                    </div>
+                    <div class="hide" id="error-massage">
+                        <p>** The identification process failed,<br />one or more of the details is incorrect</p>
+                    </div>
+                    <div> <button class="submit" id="login-submit" type="submit">login</button></div>
+                </form>
             </div>
-            <div class="mt-16px mb-16px">
-                <label for="pwd">Password</label>
-                <input type="password" id="pwd" name="pwd" required="required">
-            </div>
-            <div class="hide" id="error-massage">
-                <p>** The identification process failed,<br />one or more of the details is incorrect</p>
-            </div>
-            <div> <button class="submit" id="login-submit" type="submit">login</button></div>
-        </form>
+        </div>
     </div>
     <div id="you-must-login">
         <button id="close-modal">
