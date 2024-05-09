@@ -98,7 +98,54 @@ gradient2.addColorStop('1.0', 'blue');
 
 mainLoop();
 drawCharacter();
+//Check for mobile device
+document.body.addEventListener("touchstart",(e)=>{
+  
+})
+//Put events for touch based actions
+let canvasElement = document.querySelector("canvas");
+let touchStartX = 0;
+let touchStartY=0;
+let touchEndX=0;
+let touchEndY=0;
+canvasElement.addEventListener("touchstart",(e)=>{
+  touchStartX=e.changedTouches[0].screenX;
+  touchStartY=e.changedTouches[0].screenY;
+  // keyboard.any = true;
+},false)
 
+canvasElement.addEventListener("touchmove",(e)=>{
+  const delx = e.changedTouches[0].screenX - touchStartX;
+  const dely = e.changedTouches[0].screenY - touchStartY;
+  document.getElementById('score-span').innerHTML = "touchmove";
+  if(Math.abs(delx) > Math.abs(dely)){
+    if(delx > 0) {
+      keyboard.right=true;
+      document.getElementById('score-span').innerHTML = "right";
+    }
+    else {
+      keyboard.left=true;
+      document.getElementById('score-span').innerHTML = "left";
+    }
+  }
+  else if(Math.abs(delx) < Math.abs(dely)){
+      if(dely > 0) {
+        console.log("down");
+      }
+      else {
+        keyboard.up=true;
+        document.getElementById('score-span').innerHTML = "up";
+      }
+  }
+  else console.log("tap")
+  keyboard.any = true;
+})
+canvasElement.addEventListener("touchend",(e)=>{
+  keyboard.left=false;
+  keyboard.right=false;
+  keyboard.up=false;
+  // keyboard.any=false;
+})
 // EVENTS /////////////
 keyboardEvents.forEach((eventString)=>{
   document.addEventListener(eventString, (e)=>{
@@ -195,7 +242,7 @@ const moveChar = {
     // Set the flag to indicate that the character is in the middle of a jump
     gameState.inMiddleOfJump = true;
   },
-  left: function(){ character.distanceX = -2; },
+  left: function(){ character.distanceX = -2; console.log("character",character)},
   right: function(){ character.distanceX = 2; }
 }
 
@@ -437,6 +484,7 @@ function mainLoop() {
 
   if (gameState.isGameOver == false) {
     if (keyboard.any) {
+      console.log("this is called");
       context.clearRect(0, 0, canvas.width, canvas.height);
       if (keyboard.up) { moveChar.up(); } else { gameState.inMiddleOfJump = false; }
       if (keyboard.left) { moveChar.left(); }
