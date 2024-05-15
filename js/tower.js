@@ -43,7 +43,7 @@ const gameState = {
   inMiddleOfJump: false,
   isGameOver: false,
   isHighScore: false,
-  powerOfJump: -3,
+  powerOfJump: -4,
   score: 0,
   step: 0,
   times: 0,
@@ -99,18 +99,21 @@ gradient2.addColorStop('1.0', 'blue');
 mainLoop();
 drawCharacter();
 //Check for mobile device
-document.body.addEventListener("touchstart",(e)=>{
-  
-})
+
 //Put events for touch based actions
 let canvasElement = document.querySelector("canvas");
 let touchStartX = 0;
 let touchStartY=0;
 let touchEndX=0;
-let touchEndY=0;
+let touchEndY=0
 canvasElement.addEventListener("touchstart",(e)=>{
   touchStartX=e.changedTouches[0].screenX;
   touchStartY=e.changedTouches[0].screenY;
+  if(e.touches.length === 1){
+    console.log("up")
+    keyboard.up = true;
+    keyboard.any = true;
+  }
   // keyboard.any = true;
 },false)
 
@@ -133,8 +136,8 @@ canvasElement.addEventListener("touchmove",(e)=>{
         console.log("down");
       }
       else {
-        keyboard.up=true;
-        document.getElementById('score-span').innerHTML = "up";
+        // keyboard.up=true;
+        // document.getElementById('score-span').innerHTML = "up";
       }
   }
   else console.log("tap")
@@ -232,6 +235,7 @@ const moveChar = {
     character.onGround = false;
 
     // Check if the character is not in the middle of a jump
+  
     if (!gameState.inMiddleOfJump) gameState.powerOfJump = -3; // Set the initial jump power
     else gameState.powerOfJump += 0.2; // Increase the jump power if the character is already jumping
 
@@ -241,9 +245,27 @@ const moveChar = {
     character.distanceY += gameState.powerOfJump;
     // Set the flag to indicate that the character is in the middle of a jump
     gameState.inMiddleOfJump = true;
+    if (gameState.moveLeft){
+      character.distanceX = -2;
+      gameState.moveLeft=false;
+    } else if(gameState.moveRight) {
+      character.distanceX = 2;
+      gameState.moveRight=false;
+    }
+
   },
-  left: function(){ character.distanceX = -2; console.log("character",character)},
-  right: function(){ character.distanceX = 2; }
+  left: function(){ 
+    gameState.moveLeft = true;
+    if (!gameState.inMiddleOfJump){
+      character.distanceX = -2;
+    }
+  },
+  right: function(){ 
+    gameState.moveRight=true;
+    if(!gameState.inMiddleOfJump){
+      character.distanceX = 2;
+    }
+  }
 }
 
 function randomMinMax(min, max) {
@@ -484,7 +506,6 @@ function mainLoop() {
 
   if (gameState.isGameOver == false) {
     if (keyboard.any) {
-      console.log("this is called");
       context.clearRect(0, 0, canvas.width, canvas.height);
       if (keyboard.up) { moveChar.up(); } else { gameState.inMiddleOfJump = false; }
       if (keyboard.left) { moveChar.left(); }
