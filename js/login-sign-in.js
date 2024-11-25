@@ -106,23 +106,25 @@ function checkLoginValidation(e) {
   let massege = document.querySelector('#error-massage');
   let password = document.querySelector('#pwd').value;
   let userName = document.querySelector('#email').value;
-  console.log(userName); // Is this a debugging statement?
   let user = JSON.parse(localStorage.getItem(userName));
   if (user == null || user.password != password) {
-    massege.classList.remove('hide');
-    return;
+      massege.classList.remove('hide');
+      return;
   }
   const currentUser = {
-    firstName: user['firstName'],
-    userName: userName,
-    highScore: user.highScore,
-    secondScore: user.secondScore,
+      firstName: user['firstName'],
+      userName: userName,
+      highScore: user.highScore,
+      secondScore: user.secondScore,
   };
   sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
   massege.classList.add('hide');
-  modalLogin.hide()
-  updateHeloUser();
+  modalLogin.hide();
+
+  // Redirect to home page
+  window.location.href = "../html/icy-tower-home.html";
 }
+
 
 function checkEqualtoPwd() {
   let pw = document.querySelector('#pasword-first').value;
@@ -234,3 +236,43 @@ function updateHeloUser() {
 
   toggleImageOpacity(true);
 }
+
+
+const startGameLink = document.getElementById('start-game-link');
+const loginMessage = document.getElementById('you-must-login');
+
+// Add event listener to the game link
+startGameLink.addEventListener('click', (e) => {
+    if (sessionStorage.getItem('currentUser') === null) {
+        e.preventDefault();
+        loginMessage.style.display = 'block'; 
+    }
+});
+
+// Function to check login status and update the link's state
+function checkLoginStatus() {
+    if (sessionStorage.getItem('currentUser') === null) {
+        startGameLink.style.pointerEvents = 'none';
+    } else {
+        startGameLink.style.pointerEvents = 'auto';
+    }
+}
+
+// Call checkLoginStatus initially
+checkLoginStatus();
+
+// Assuming this function is called when the user logs in
+function loginUser(username) {
+  // Simulate logging in
+  sessionStorage.setItem('currentUser', username);
+  
+  // Update the state of the link immediately after login
+  checkLoginStatus();
+  
+  // Optionally, hide the login message
+  loginMessage.style.display = 'none';
+  
+  // Redirect to the home page (or any other page)
+  window.location.href = '../html/icy-tower-home.html'; // Replace 'home.html' with your home page URL
+}
+
