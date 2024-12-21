@@ -622,3 +622,19 @@ function gradientAnimation() {
 function displayScore(){
   document.querySelector('#score-span').innerHTML = gameState.score;
 }
+document.querySelector('.btn-close').addEventListener('click', () => {
+  modalMusicAgreement.hide();
+});
+
+document.querySelector('.btn-agree').addEventListener('click', () => {
+  modalMusicAgreement.hide();
+  music.isPlayMusic = true;
+  music.background.volume = 0.5; // Set default volume
+  music.background.play();
+});
+
+const volumeControl = document.getElementById('volume-control');
+volumeControl.addEventListener('input', (event) => {
+  const volume = event.target.value;
+  music.background.volume = volume; // Adjust the music volume
+});

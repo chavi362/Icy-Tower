@@ -17,8 +17,7 @@ function updateScores() {
   const scoreToPut = {
     firstName: currentUser.firstName,
     userName: currentUser.userName,
-    score: currentUser.highScore,
-  };
+    score: currentUser.highScore,  };
   let j = 0;
   console.log(currentUser.secondScore);
   for (let i = 0; i < 3; i++) {
@@ -84,6 +83,7 @@ function updateScoreInHtml() {
         name: currentUser.firstName,
         userName: currentUser.userName,
         score: 0,
+        timestamp:null
       });
     else arrOfObjects.push(highScore);
   }
@@ -103,7 +103,7 @@ function updateScoreInHtml() {
     ' ' +
     arrOfObjects[1]['userName'] +
     ' : ' +
-    arrOfObjects[1].score;
+    arrOfObjects[1].score ;
   let thirdHighScore = document.getElementById('their-third');
   thirdHighScore.innerHTML =
     '3-' +
@@ -111,7 +111,8 @@ function updateScoreInHtml() {
     ' ' +
     arrOfObjects[2]['userName'] +
     ' : ' +
-    arrOfObjects[2].score;
+    arrOfObjects[2].score ;
+
   let yourHigh = document.getElementById('your-high-score');
   yourHigh.innerHTML = 'your highest score :' + currentUser.highScore;
   let yourSecond = document.getElementById('your-second-score');
