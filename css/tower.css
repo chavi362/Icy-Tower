@@ -83,3 +83,17 @@ body {
   margin-right: 42.5%;
   margin-left: 42.5%;
 }
+.sound-bar {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.sound-bar label {
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+#volume-control {
+  width: 100px;
+}
