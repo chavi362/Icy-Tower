@@ -10,7 +10,7 @@ body {
   background-image: url('../image/background-for-game.png');
   background-repeat: no-repeat;
   background-size: cover;
-  font-family: 'Pacifico', cursive;
+  font-family: 'Roboto', 'Arial', sans-serif;
 }
 
 h1 {

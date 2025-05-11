@@ -2,7 +2,7 @@ body {
   background-image: url('../image/background-for-game.png');
   background-repeat: no-repeat;
   background-size: cover;
-  font-family: 'Pacifico', cursive;
+  font-family: 'Roboto', 'Arial', sans-serif;
 }
 
 .logo {
@@ -25,7 +25,7 @@ body {
   color: rgb(204, 137, 13);
   margin-left: 10%;
   margin-top: -0.3%;
-  font-family: 'Pacifico', cursive;
+  font-family: 'Roboto', 'Arial', sans-serif;
   text-decoration: none;
 }
 

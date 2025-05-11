@@ -63,7 +63,7 @@ p {
   color: rgb(204, 137, 13);
   margin-left: 10%;
   margin-top: -0.3%;
-  font-family: 'Pacifico', cursive;
+  font-family: 'Roboto', 'Arial', sans-serif;
 }
 @media (max-width: 750px) {
   p {

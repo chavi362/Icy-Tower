@@ -2,7 +2,7 @@ body {
   background-image: url('../image/background-for-game.png');
   background-repeat: no-repeat;
   background-size: cover;
-  font-family: 'Pacifico', cursive;
+  font-family: 'Roboto', 'Arial', sans-serif;
   text-align: center;
 }
 
@@ -55,7 +55,7 @@ h1 {
   border-radius: 30px;
   border: 1px solid black;
   color: rgb(204, 137, 13);
-  font-family: 'Pacifico', cursive;
+  font-family: 'Roboto', 'Arial', sans-serif;
   font-size: 20px;
   background-color: white;
   text-decoration: none;

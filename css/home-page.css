@@ -11,7 +11,7 @@ body {
   background-image: url('../image/background-for-game.png');
   background-repeat: no-repeat;
   background-size: cover;
-  font-family: 'Pacifico', cursive;
+  font-family: 'Roboto', 'Arial', sans-serif;
   margin: 0%;
   text-align: center;
 }
@@ -231,7 +231,7 @@ body.modal-open {
   outline: none;
   font-size: 20px;
   background: white;
-  font-family: 'Pacifico', cursive;
+  font-family: 'Roboto', 'Arial', sans-serif;
 }
 #open-form:hover {
   transform: scale(1.1);
@@ -255,7 +255,7 @@ body.modal-open {
   border-radius: 30px;
   border: 1px solid #ccc;
   color: #315bff;
-  font-family: 'Pacifico', cursive;
+  font-family: 'Roboto', 'Arial', sans-serif;
   font-size: 1.1em;
 }
 
