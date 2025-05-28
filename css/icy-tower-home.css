@@ -15,15 +15,17 @@ body {
 }
 
 .options {
-  margin-left: 6%;
+  margin:auto;
+  justify-content: center;
+  align-items: center;
 }
 
 .options a {
   font: outline;
-  font-size: 500%;
+  font-size: 400%; /*changed font from 500 to 400 to fit the page to the screen */
   font: bold;
   color: rgb(204, 137, 13);
-  margin-left: 10%;
+  margin-left: 36%; /*changed percentage from 10 to 36 to center the options for better structring of page*/
   margin-top: -0.3%;
   font-family: 'Pacifico', cursive;
   text-decoration: none;
