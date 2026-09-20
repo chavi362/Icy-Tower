@@ -2,7 +2,8 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   width: 100%;
 }
@@ -28,9 +29,15 @@ body.modal-open {
   width: 100%;
 }
 
-.mt-16px { margin-top: 16px; }
-.mb-16px { margin-bottom: 16px; }
-.text-start { text-align: left; }
+.mt-16px {
+  margin-top: 16px;
+}
+.mb-16px {
+  margin-bottom: 16px;
+}
+.text-start {
+  text-align: left;
+}
 
 .main-heading {
   text-align: center;

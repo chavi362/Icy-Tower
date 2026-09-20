@@ -1,12 +1,13 @@
 class Modal {
   constructor(elementId) {
     this.modal = document.getElementById(elementId);
-    try{
-      this.modal.querySelector('.btn-close-modal').addEventListener('click', ()=>{
-        this.hide()
-      })
-    } catch(e) {}
-    
+    try {
+      this.modal
+        .querySelector('.btn-close-modal')
+        .addEventListener('click', () => {
+          this.hide();
+        });
+    } catch (e) {}
   }
   hide() {
     this.modal.classList.add('hide');
@@ -18,19 +19,19 @@ class Modal {
     this.modal.classList.remove('hide');
     this.checkAllModalState();
   }
-  checkAllModalState(){
+  checkAllModalState() {
     let isModalOpen = false;
     const docbody = document.getElementsByTagName('body')[0];
     docbody.classList.remove('modal-open');
-    document.querySelectorAll('.modal').forEach((el)=>{
-      if(el.classList.contains('show')){
+    document.querySelectorAll('.modal').forEach((el) => {
+      if (el.classList.contains('show')) {
         docbody.classList.add('modal-open');
         isModalOpen = true;
       }
-    })
+    });
 
-    if(isModalOpen){
-      const overlayLayer = document.createElement("div");
+    if (isModalOpen) {
+      const overlayLayer = document.createElement('div');
       overlayLayer.className = 'modal-overlay';
       docbody.append(overlayLayer);
     } else {
@@ -44,8 +45,6 @@ const btnOpen = document.querySelector('#open-form');
 let verifyPwd = document.querySelector('#verify-pwd');
 let password = document.querySelector('#pasword-first');
 let submBtn = document.querySelector('#sign-in-submit');
-let allImg = document.querySelectorAll('a');
-let closeDiv = document.getElementById('close-modal');
 let checkLogin = document.querySelector('#login-submit');
 const modalList = document.querySelectorAll('div.modal');
 const btnToggleForm = document.getElementsByClassName('js-toggle-form');
@@ -58,32 +57,24 @@ if (sessionStorage.getItem('currentUser') != null) {
 }
 
 // EVENTS /////////////
-Object.keys(btnToggleForm).forEach((i)=>{
-  btnToggleForm[i].addEventListener('click', (e)=>{
-    modalList.forEach((el)=>{
-      if(e.target.dataset.toggleTo === el.dataset.formType){
+Object.keys(btnToggleForm).forEach((i) => {
+  btnToggleForm[i].addEventListener('click', (e) => {
+    modalList.forEach((el) => {
+      if (e.target.dataset.toggleTo === el.dataset.formType) {
         el.classList.remove('hide');
         el.classList.add('show');
       } else {
         el.classList.remove('show');
         el.classList.add('hide');
       }
-    })
-  })
-})
+    });
+  });
+});
 
 btnOpen.addEventListener('click', () => {
   modalLogin.show();
 });
 
-closeDiv.addEventListener('click', () => {
-  let loginMEssage = document.getElementById('you-must-login');
-  loginMEssage.style.display = 'none';
-});
-
-allImg.forEach(function (item) {
-  item.addEventListener('click', addMessage);
-});
 
 submBtn.addEventListener('click', saveUser);
 checkLogin.addEventListener('click', checkLoginValidation);
@@ -92,9 +83,9 @@ password.addEventListener('input', checkEqualtoPwd);
 verifyPwd.addEventListener('input', checkEqualtoPwd);
 
 // FUNCTIONS /////////////
-function toggleImageOpacity(state){
+function toggleImageOpacity(state) {
   const listAllImage = document.querySelectorAll('img');
-  if(state){
+  if (state) {
     listAllImage.forEach((img) => (img.style.opacity = 1));
   } else {
     listAllImage.forEach((img) => (img.style.opacity = 0.5));
@@ -120,7 +111,7 @@ function checkLoginValidation(e) {
   };
   sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
   massege.classList.add('hide');
-  modalLogin.hide()
+  modalLogin.hide();
   updateHeloUser();
 }
 
@@ -211,20 +202,12 @@ function saveUser(e) {
   updateHeloUser();
 }
 
-function addMessage(e) {
-  console.log('g');
-  if (sessionStorage.getItem('currentUser') === null) {
-    e.preventDefault();
-    let loginMEssage = document.getElementById('you-must-login');
-    loginMEssage.style.display = 'block';
-  }
-}
 
 function updateHeloUser() {
   currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
   const spanFName = document.getElementById('user-first-name');
   spanFName.innerHTML = 'hello ' + currentUser.firstName;
-  
+
   const spanUserName = document.getElementById('user-name');
   spanUserName.innerHTML = currentUser.userName;
 

@@ -1,111 +1,158 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
-        href="https://fonts.googleapis.com/css?family=Cabin|Inconsolata|Nunito|Nunito+Sans|Pacifico|Quicksand|Rubik|VT323"
-        rel="stylesheet">
-    <link rel="stylesheet" href="../css/home-page.css">
+      href="https://fonts.googleapis.com/css?family=Cabin|Inconsolata|Nunito|Nunito+Sans|Pacifico|Quicksand|Rubik|VT323"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/home-page.css" />
 
     <title>Home</title>
-    <link rel="icon" href="../image/icyTower.png">
-</head>
+    <link rel="icon" href="../image/icyTower.png" />
+  </head>
 
-<body>
-    <header style="position: absolute; width: 100%;">
-        <div class="hide" id="hello-user">
-            <span id="user-first-name"></span><br>
-            <span id="user-name"> </span>
-        </div>
-        <button id="open-form">Login to your account</button>
-        <div>
-            <ul class="c-rainbow">
-                <li class="c-rainbow__layer c-rainbow__layer--white">Icy-Tower</li>
-                <li class="c-rainbow__layer c-rainbow__layer--orange">Icy-Tower</li>
-                <li class="c-rainbow__layer c-rainbow__layer--red">Icy-Tower</li>
-                <li class="c-rainbow__layer c-rainbow__layer--violet">Icy-Tower</li>
-                <li class="c-rainbow__layer c-rainbow__layer--blue">Icy-Tower</li>
-                <li class="c-rainbow__layer c-rainbow__layer--green">Icy-Tower</li>
-                <li class="c-rainbow__layer c-rainbow__layer--yellow">Icy-Tower</li>
-            </ul>
-        </div>
+  <body>
+    <header style="position: absolute; width: 100%">
+      <div class="hide" id="hello-user">
+        <span id="user-first-name"></span><br />
+        <span id="user-name"> </span>
+      </div>
+      <button id="open-form">Login to your account</button>
+      <div>
+        <ul class="c-rainbow">
+          <li class="c-rainbow__layer c-rainbow__layer--white">Icy-Tower</li>
+          <li class="c-rainbow__layer c-rainbow__layer--orange">Icy-Tower</li>
+          <li class="c-rainbow__layer c-rainbow__layer--red">Icy-Tower</li>
+          <li class="c-rainbow__layer c-rainbow__layer--violet">Icy-Tower</li>
+          <li class="c-rainbow__layer c-rainbow__layer--blue">Icy-Tower</li>
+          <li class="c-rainbow__layer c-rainbow__layer--green">Icy-Tower</li>
+          <li class="c-rainbow__layer c-rainbow__layer--yellow">Icy-Tower</li>
+        </ul>
+      </div>
     </header>
-    
 
     <div id="modal-register" class="modal hide" data-form-type="register">
-        <div class="modal-dialog">
-            <div class="form modal-content">
-                <div class="text-start"><button class="btn-close btn-close-modal" type="button"></button></div>
-                <button class="change-form js-toggle-form" data-toggle-to="login" id="change-to-login" type="button">already have an acount? click to login</button>
-                <form method="get">
-                    <div class="mt-16px mb-16px">
-                        <label for="first-name">first name</label>
-                        <input type="text" id="first-name" name="first-name">
-                    </div>
-                    <div class="mt-16px mb-16px">
-                        <label for="email">email</label>
-                        <input  name="email-user-name" type="email" id="user-name" placeholder="this will be your user name">
-                    </div>
-                    <div class="mt-16px mb-16px">
-                        <label for="pwd">Password</label>
-                        <br>
-                        <input type="password" id="pasword-first" name="pwd" placeholder="your password">
-                        <span id="message" class="message"></span>
-                    </div> 
-                    <div class="mt-16px mb-16px">
-                        <label for="verify password">verify Password</label>
-                        <input type="password" id="verify-pwd" name="verify password" placeholder="retype your password">
-                        <span class="hide" id="verify-message">**Enter the password here again</span>
-                    </div>
-                    <button class="submit" id="sign-in-submit">sign-up</button>
-                    <br />
-                    <span class="message" id="submit-error-message"></span>
-                </form>
+      <div class="modal-dialog">
+        <div class="form modal-content">
+          <div class="text-start">
+            <button class="btn-close btn-close-modal" type="button"></button>
+          </div>
+          <button
+            class="change-form js-toggle-form"
+            data-toggle-to="login"
+            id="change-to-login"
+            type="button"
+          >
+            already have an acount? click to login
+          </button>
+          <form method="get">
+            <div class="mt-16px mb-16px">
+              <label for="first-name">first name</label>
+              <input type="text" id="first-name" name="first-name" />
             </div>
+            <div class="mt-16px mb-16px">
+              <label for="email">email</label>
+              <input
+                name="email-user-name"
+                type="email"
+                id="user-name"
+                placeholder="this will be your user name"
+              />
+            </div>
+            <div class="mt-16px mb-16px">
+              <label for="pwd">Password</label>
+              <br />
+              <input
+                type="password"
+                id="pasword-first"
+                name="pwd"
+                placeholder="your password"
+              />
+              <span id="message" class="message"></span>
+            </div>
+            <div class="mt-16px mb-16px">
+              <label for="verify password">verify Password</label>
+              <input
+                type="password"
+                id="verify-pwd"
+                name="verify password"
+                placeholder="retype your password"
+              />
+              <span class="hide" id="verify-message"
+                >**Enter the password here again</span
+              >
+            </div>
+            <button class="submit" id="sign-in-submit">sign-up</button>
+            <br />
+            <span class="message" id="submit-error-message"></span>
+          </form>
         </div>
+      </div>
     </div>
 
     <div id="modal-login" class="modal hide" data-form-type="login">
-        <div class="modal-dialog">
-            <div class="form modal-content">
-                <div class="text-start"><button class="btn-close btn-close-modal" type="button"></button></div>
-                <button class="change-form js-toggle-form" data-toggle-to="register" id="change-to-sign" type="button">don't have an account? sign-up</button>
-                <h2>we are happy to see you again!</h2>
-                <form>
-                    <div class="mt-16px mb-16px">
-                        <label for="user">email</label>
-                        <input type="email" id="email" name="user" required="required">
-                    </div>
-                    <div class="mt-16px mb-16px">
-                        <label for="pwd">Password</label>
-                        <input type="password" id="pwd" name="pwd" required="required">
-                    </div>
-                    <div class="hide" id="error-massage">
-                        <p>** The identification process failed,<br />one or more of the details is incorrect</p>
-                    </div>
-                    <div> <button class="submit" id="login-submit" type="submit">login</button></div>
-                </form>
+      <div class="modal-dialog">
+        <div class="form modal-content">
+          <div class="text-start">
+            <button class="btn-close btn-close-modal" type="button"></button>
+          </div>
+          <button
+            class="change-form js-toggle-form"
+            data-toggle-to="register"
+            id="change-to-sign"
+            type="button"
+          >
+            don't have an account? sign-up
+          </button>
+          <h2>we are happy to see you again!</h2>
+          <form>
+            <div class="mt-16px mb-16px">
+              <label for="user">email</label>
+              <input type="email" id="email" name="user" required="required" />
             </div>
+            <div class="mt-16px mb-16px">
+              <label for="pwd">Password</label>
+              <input type="password" id="pwd" name="pwd" required="required" />
+            </div>
+            <div class="hide" id="error-massage">
+              <p>
+                ** The identification process failed,<br />one or more of the
+                details is incorrect
+              </p>
+            </div>
+            <div>
+              <button class="submit" id="login-submit" type="submit">
+                login
+              </button>
+            </div>
+          </form>
         </div>
-    </div>
-    <div id="you-must-login">
-        <button id="close-modal">
-            <img src="../image/x.png" alt="x">
-        </button>
-       <span><strong>please login to continue</strong><br>You can't play without being logged into your account</span> 
+      </div>
     </div>
     <div class="icy-tower-wrap">
-        <img class="icy-tower-img" src="../image/stone-wall.jpg">
+      <img class="icy-tower-img" src="../image/stone-wall.jpg" />
     </div>
 
-    <div style="display: flex; height: 100%; width: 100%; justify-content: center; align-items: center;">
-        <a href="../html/icy-tower-home.html" class="game"><img  class="icy-img" src="../image/icy-tower-start1.png" style="margin-top: 50px; width: 40vw;"></a>
-    </div>                                
-     
-    <script src="../js/login-sign-in.js"></script>
-</body>
+    <div
+      style="
+        display: flex;
+        height: 100%;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <a href="../html/icy-tower-home.html" class="game"
+        ><img
+          class="icy-img"
+          src="../image/icy-tower-start1.png"
+          style="margin-top: 50px; width: 40vw"
+      /></a>
+    </div>
 
+    <script src="../js/login-sign-in.js"></script>
+  </body>
 </html>

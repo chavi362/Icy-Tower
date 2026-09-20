@@ -2,8 +2,12 @@ class Modal {
   constructor(elementId) {
     this.modal = document.getElementById(elementId);
   }
-  hide() { this.modal.style.display = 'none'; }
-  show() { this.modal.style.display = 'block'; }
+  hide() {
+    this.modal.style.display = 'none';
+  }
+  show() {
+    this.modal.style.display = 'block';
+  }
 }
 
 class block {
@@ -22,8 +26,8 @@ class block {
   }
 }
 
-const modalGameOver = new Modal('over-modal')
-const modalMusicAgreement = new Modal('agree-to-sound')
+const modalGameOver = new Modal('over-modal');
+const modalMusicAgreement = new Modal('agree-to-sound');
 
 const urlParams = new URLSearchParams(document.location.search);
 const canvas = document.getElementById('myCanvas');
@@ -34,10 +38,10 @@ const music = {
   background: new Audio('../audio/happy-day-113985.mp3'),
   success: new Audio('../audio/game-bonus-144751.mp3'),
   failure: new Audio('../audio/wah-wah-sad-trombone-6347.mp3'),
-}
+};
 
-const gameConf = setGameConfig()
-const keyboardEvents = ['keyup','keydown']
+const gameConf = setGameConfig();
+const keyboardEvents = ['keyup', 'keydown'];
 const keyboard = { right: false, left: false, up: false, any: false };
 const gameState = {
   inMiddleOfJump: false,
@@ -47,7 +51,7 @@ const gameState = {
   score: 0,
   step: 0,
   times: 0,
-}
+};
 
 let blocks = [];
 let gradient = context.createLinearGradient(0, 0, canvas.width, 0);
@@ -59,7 +63,8 @@ let texString1 = '';
 let texString2 = '';
 let alphabet_index = 0;
 
-let character = { // Define the character object
+let character = {
+  // Define the character object
   x: canvas.width / 2 - 12.5,
   y: canvas.height - 20,
   height: 20,
@@ -101,59 +106,59 @@ drawCharacter();
 //Check for mobile device
 
 //Put events for touch based actions
-let canvasElement = document.querySelector("canvas");
+let canvasElement = document.querySelector('canvas');
 let touchStartX = 0;
-let touchStartY=0;
-let touchEndX=0;
-let touchEndY=0
-canvasElement.addEventListener("touchstart",(e)=>{
-  touchStartX=e.changedTouches[0].screenX;
-  touchStartY=e.changedTouches[0].screenY;
-  if(e.touches.length === 1){
-    console.log("up")
-    keyboard.up = true;
-    keyboard.any = true;
-  }
-  // keyboard.any = true;
-},false)
+let touchStartY = 0;
+let touchEndX = 0;
+let touchEndY = 0;
+canvasElement.addEventListener(
+  'touchstart',
+  (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+    if (e.touches.length === 1) {
+      console.log('up');
+      keyboard.up = true;
+      keyboard.any = true;
+    }
+    // keyboard.any = true;
+  },
+  false
+);
 
-canvasElement.addEventListener("touchmove",(e)=>{
+canvasElement.addEventListener('touchmove', (e) => {
   const delx = e.changedTouches[0].screenX - touchStartX;
   const dely = e.changedTouches[0].screenY - touchStartY;
-  document.getElementById('score-span').innerHTML = "touchmove";
-  if(Math.abs(delx) > Math.abs(dely)){
-    if(delx > 0) {
-      keyboard.right=true;
-      document.getElementById('score-span').innerHTML = "right";
+  document.getElementById('score-span').innerHTML = 'touchmove';
+  if (Math.abs(delx) > Math.abs(dely)) {
+    if (delx > 0) {
+      keyboard.right = true;
+      document.getElementById('score-span').innerHTML = 'right';
+    } else {
+      keyboard.left = true;
+      document.getElementById('score-span').innerHTML = 'left';
     }
-    else {
-      keyboard.left=true;
-      document.getElementById('score-span').innerHTML = "left";
+  } else if (Math.abs(delx) < Math.abs(dely)) {
+    if (dely > 0) {
+      console.log('down');
+    } else {
+      // keyboard.up=true;
+      // document.getElementById('score-span').innerHTML = "up";
     }
-  }
-  else if(Math.abs(delx) < Math.abs(dely)){
-      if(dely > 0) {
-        console.log("down");
-      }
-      else {
-        // keyboard.up=true;
-        // document.getElementById('score-span').innerHTML = "up";
-      }
-  }
-  else console.log("tap")
+  } else console.log('tap');
   keyboard.any = true;
-})
-canvasElement.addEventListener("touchend",(e)=>{
-  keyboard.left=false;
-  keyboard.right=false;
-  keyboard.up=false;
+});
+canvasElement.addEventListener('touchend', (e) => {
+  keyboard.left = false;
+  keyboard.right = false;
+  keyboard.up = false;
   // keyboard.any=false;
-})
+});
 // EVENTS /////////////
-keyboardEvents.forEach((eventString)=>{
-  document.addEventListener(eventString, (e)=>{
+keyboardEvents.forEach((eventString) => {
+  document.addEventListener(eventString, (e) => {
     let state = e.type === 'keydown'; // Check if the event type is keydown
-    
+
     if (e.keyCode == 39) {
       keyboard.right = state; // Set the right property of the keyboard object based on the key state
     } else if (e.keyCode == 37) {
@@ -166,21 +171,23 @@ keyboardEvents.forEach((eventString)=>{
     if (state) {
       keyboard.any = true; // Set the any property of the keyboard object to true if any key is pressed
     }
-  })
-})
+  });
+});
 
-modalMusicAgreement.modal.querySelectorAll('button').forEach((el)=>{
-  el.addEventListener('click', ()=>{
+modalMusicAgreement.modal.querySelectorAll('button').forEach((el) => {
+  el.addEventListener('click', () => {
     modalMusicAgreement.hide();
-    if(el.classList.contains('btn-agree')){
+    if (el.classList.contains('btn-agree')) {
       music.isPlayMusic = true;
     }
-  })
-})
+  });
+});
 
-modalGameOver.modal.querySelector('#close-modal').addEventListener('click', ()=>{
-  modalGameOver.hide()
-})
+modalGameOver.modal
+  .querySelector('#close-modal')
+  .addEventListener('click', () => {
+    modalGameOver.hide();
+  });
 
 blockImages[gameState.step].addEventListener('load', () => {
   initBlocks();
@@ -192,7 +199,7 @@ characterImg.addEventListener('load', () => {
 });
 
 // FUNCTIONS /////////////
-function setGameConfig(){
+function setGameConfig() {
   const defaultConf = {
     minBlockWidth: 0,
     horizontalDistance: 0,
@@ -203,40 +210,57 @@ function setGameConfig(){
     gravity: 1.0,
     drag: 0.999,
     groundDrag: 0.9,
-    heroImagePath: sessionStorage.getItem('hero') || '../image/hero2_2.png'
-  }
+    heroImagePath: sessionStorage.getItem('hero') || '../image/hero2_2.png',
+  };
 
-  let newConf = {}
-  
-  switch(defaultConf.difficulty){
+  let newConf = {};
+
+  switch (defaultConf.difficulty) {
     case 'beginner':
-      newConf = { minBlockWidth: 112, horizontalDistance: 60, velocity: [0.15, 0.3] }
+      newConf = {
+        minBlockWidth: 112,
+        horizontalDistance: 60,
+        velocity: [0.15, 0.3],
+      };
       break;
     case 'advanced':
-      newConf = { minBlockWidth: 100, horizontalDistance: 70, velocity: [0.2, 0.6] }
+      newConf = {
+        minBlockWidth: 100,
+        horizontalDistance: 70,
+        velocity: [0.2, 0.6],
+      };
       break;
     case 'champions':
-      newConf = { minBlockWidth: 80, horizontalDistance: 85, velocity: [0.3, 0.8] }
+      newConf = {
+        minBlockWidth: 80,
+        horizontalDistance: 85,
+        velocity: [0.3, 0.8],
+      };
       break;
     default:
-      newConf = { minBlockWidth: 112, horizontalDistance: 60, velocity: [0.15, 0.3] }
+      newConf = {
+        minBlockWidth: 112,
+        horizontalDistance: 60,
+        velocity: [0.15, 0.3],
+      };
       break;
   }
-  
-  Object.assign(defaultConf, {...defaultConf, ...newConf})
 
-  return defaultConf
+  Object.assign(defaultConf, { ...defaultConf, ...newConf });
+
+  return defaultConf;
 }
 
 const moveChar = {
-  up: function(){
+  up: function () {
     //Note that here, in js it is the opposite of a minus jump is a high jump
     // Set the character's onGround flag to false to indicate that it is in the air
     character.onGround = false;
 
     // Check if the character is not in the middle of a jump
-  
-    if (!gameState.inMiddleOfJump) gameState.powerOfJump = -3; // Set the initial jump power
+
+    if (!gameState.inMiddleOfJump)
+      gameState.powerOfJump = -3; // Set the initial jump power
     else gameState.powerOfJump += 0.2; // Increase the jump power if the character is already jumping
 
     // Limit the maximum jump power to -0.3
@@ -245,28 +269,27 @@ const moveChar = {
     character.distanceY += gameState.powerOfJump;
     // Set the flag to indicate that the character is in the middle of a jump
     gameState.inMiddleOfJump = true;
-    if (gameState.moveLeft){
+    if (gameState.moveLeft) {
       character.distanceX = -2;
-      gameState.moveLeft=false;
-    } else if(gameState.moveRight) {
+      gameState.moveLeft = false;
+    } else if (gameState.moveRight) {
       character.distanceX = 2;
-      gameState.moveRight=false;
+      gameState.moveRight = false;
     }
-
   },
-  left: function(){ 
+  left: function () {
     gameState.moveLeft = true;
-    if (!gameState.inMiddleOfJump){
+    if (!gameState.inMiddleOfJump) {
       character.distanceX = -2;
     }
   },
-  right: function(){ 
-    gameState.moveRight=true;
-    if(!gameState.inMiddleOfJump){
+  right: function () {
+    gameState.moveRight = true;
+    if (!gameState.inMiddleOfJump) {
       character.distanceX = 2;
     }
-  }
-}
+  },
+};
 
 function randomMinMax(min, max) {
   // Generate a random number between min and max (inclusive)
@@ -339,7 +362,10 @@ function initBlocks() {
       canvas.width * 0.09 + gameConf.minBlockWidth
     ); // Generate a random width for the block
     x =
-      (randomMinMax(gameConf.horizontalDistance, gameConf.horizontalDistance * 1.2) +
+      (randomMinMax(
+        gameConf.horizontalDistance,
+        gameConf.horizontalDistance * 1.2
+      ) +
         blocks[i - 1].x) %
       (canvas.width - width); // Calculate the x-coordinate of the block based on the previous block's position
     y = blocks[i - 1].y - gameConf.verticalDistance[0]; // Calculate the y-coordinate of the block based on the previous block's position
@@ -393,7 +419,10 @@ function addblock() {
   let height = 6;
   // Calculate the x-coordinate of the new block based on the previous block's position
   let x =
-    (randomMinMax(0.5 * gameConf.horizontalDistance, gameConf.horizontalDistance * 1.3) +
+    (randomMinMax(
+      0.5 * gameConf.horizontalDistance,
+      gameConf.horizontalDistance * 1.3
+    ) +
       blocks[0].x) %
     (canvas.width - width);
   // Calculate the y-coordinate of the new block based on the previous block's position
@@ -476,7 +505,9 @@ function gravity() {
   }
 
   // Adjust the character's horizontal movement based on whether it is on the ground or not
-  character.distanceX *= character.onGround ? gameConf.groundDrag : gameConf.drag;
+  character.distanceX *= character.onGround
+    ? gameConf.groundDrag
+    : gameConf.drag;
   // Note: This line allows the character to move horizontally without being affected by the groundDrag when it is on the ground
 }
 
@@ -507,34 +538,50 @@ function mainLoop() {
   if (gameState.isGameOver == false) {
     if (keyboard.any) {
       context.clearRect(0, 0, canvas.width, canvas.height);
-      if (keyboard.up) { moveChar.up(); } else { gameState.inMiddleOfJump = false; }
-      if (keyboard.left) { moveChar.left(); }
-      if (keyboard.right) { moveChar.right(); }
+      if (keyboard.up) {
+        moveChar.up();
+      } else {
+        gameState.inMiddleOfJump = false;
+      }
+      if (keyboard.left) {
+        moveChar.left();
+      }
+      if (keyboard.right) {
+        moveChar.right();
+      }
 
       updatePosition();
 
-      if (gameState.score / 3 > 5) { movingScreen(); }
+      if (gameState.score / 3 > 5) {
+        movingScreen();
+      }
 
       checkState();
       gravity();
-      
+
       if (character.y < 70 && character.onGround) {
         context.clearRect(0, 0, canvas.width, canvas.height);
         movingBlocks();
         character.onGround = false;
       }
 
-      if (character.onGround) { updateScore(); }
+      if (character.onGround) {
+        updateScore();
+      }
 
       if (gameState.score > 25 && !gameState.step == 1) {
         gameState.step = 1;
-        if (music.isPlayMusic) { music.success.play(); }
+        if (music.isPlayMusic) {
+          music.success.play();
+        }
         cancelAnimationFrame(mainLoop);
       }
 
       if (gameState.score > 50 && gameState.step != 2) {
         gameState.step = 2;
-        if (music.isPlayMusic) { music.success.play(); }
+        if (music.isPlayMusic) {
+          music.success.play();
+        }
       }
 
       drawBlocks();
@@ -542,7 +589,6 @@ function mainLoop() {
     }
 
     myanim = requestAnimationFrame(mainLoop);
-
   } else {
     if (music.isPlayMusic) {
       music.background.pause();
@@ -563,7 +609,10 @@ function mainLoop() {
       let temp = currentUser.highScore;
       currentUser.highScore = gameState.score;
       currentUser.secondScore = temp;
-    } else if (gameState.score > currentUser.secondScore && !gameState.isHighScore) {
+    } else if (
+      gameState.score > currentUser.secondScore &&
+      !gameState.isHighScore
+    ) {
       gameState.isHighScore = true;
       console.log('else if');
       currentUser.secondScore = gameState.score;
@@ -615,10 +664,10 @@ function gradientAnimation() {
   if (alphabet_index <= 18) setTimeout(gradientAnimation, 100);
   else {
     //when we finished introduct "game over" twice
-    modalGameOver.show()
+    modalGameOver.show();
   }
 }
 
-function displayScore(){
+function displayScore() {
   document.querySelector('#score-span').innerHTML = gameState.score;
 }
